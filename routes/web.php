@@ -1,7 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LowonganController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('/lowongan/create', [LowonganController::class, 'create'])->name('lowongan.create');
