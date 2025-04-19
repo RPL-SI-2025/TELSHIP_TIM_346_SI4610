@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
-
 use App\Models\Lowongan;
 
-class LowonganController extends Controller
+class SeleksiController extends Controller
 {
     public function pelamar($id)
     {
+        // Mengambil data lowongan beserta relasi pelamar dan mahasiswa
         $lowongan = Lowongan::with('pelamar.mahasiswa')->findOrFail($id);
-        return view('mentor.pelamar.index', compact('lowongan'));
-    }
 
+        // Menampilkan view tanpa harus login
+        return view('mentor.index', compact('lowongan'));
+    }
 }
+

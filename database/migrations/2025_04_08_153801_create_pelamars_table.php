@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pelamars', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lowongan_id');
+            $table->unsignedBigInteger('lowongan_id')->default(1);
             $table->unsignedBigInteger('mahasiswa_id');
             $table->enum('status', ['pending', 'diterima', 'ditolak'])->default('pending');
             $table->timestamps();

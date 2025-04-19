@@ -9,7 +9,6 @@ class PelamarController extends Controller
     public function terima($id) {
         $pelamar = Pelamar::findOrFail($id);
     
-        // Cek apakah sudah diterima di tempat lain
         if (Pelamar::where('mahasiswa_id', $pelamar->mahasiswa_id)->where('status', 'diterima')->exists()) {
             return back()->with('error', 'Pelamar telah diterima di lowongan lain.');
         }

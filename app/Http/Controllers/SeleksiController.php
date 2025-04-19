@@ -7,14 +7,10 @@ use Illuminate\Http\Request;
 
 class SeleksiController extends Controller
 {
-    public function index($lowonganId)
+    public function index()
     {
-        $lamarans = Lamaran::with('pelamar')
-            ->where('lowongan_id', $lowonganId)
-            ->where('status', 'pending')
-            ->get();
-
-        return view('mentor.seleksi', compact('lamarans'));
+        
+        return view('mentor.seleksi');
     }
 
     public function terima($id)
@@ -36,5 +32,4 @@ class SeleksiController extends Controller
         return redirect()->back()->with('success', 'Pelamar diterima.');
     }
 
-    // Fungsi tolak juga bisa ditambahkan
 }
