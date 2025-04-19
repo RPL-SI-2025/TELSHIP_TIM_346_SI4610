@@ -16,5 +16,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(\App\Models\Mahasiswa::class, 'user_id', 'id');
     }
+
+    public function lowongans() {
+        return $this->hasMany(Lowongan::class, 'mentor_id');
+    }
+    
+    public function lamaran() {
+        return $this->hasMany(Pelamar::class, 'mahasiswa_id');
+    }
     
 }
