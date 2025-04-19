@@ -1,3 +1,6 @@
-    Route::get('/status', function () {
-        return view('status');
-    })->name('status');
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatusController;
+
+Route::get('/status', [StatusController::class, 'index'])->name('status');
