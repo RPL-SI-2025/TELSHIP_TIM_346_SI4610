@@ -6,6 +6,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RegisterMentorController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StatusController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -26,3 +27,5 @@ Route::post('/registermentor', [RegisterMentorController::class, 'store'])->name
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+
+Route::get('/status', [StatusController::class, 'index'])->name('status');
