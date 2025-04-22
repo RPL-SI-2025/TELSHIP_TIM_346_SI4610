@@ -23,7 +23,7 @@ class LaporanTest extends TestCase
         /** @test */
         public function user_bisa_mengakses_halaman_form_laporan_harian()
         {
-            $response = $this->get(route('laporan'));
+            $response = $this->get(route('laporan.index'));
 
             $response->assertStatus(200);
             $response->assertSee('Laporan Harian');
