@@ -4,6 +4,7 @@
     if (empty($activePage)) {
         $activePage = 'profile';
     }
+    $activePage = $activePage ?? '';
 @endphp
 <div class="p-3" style="width: 250px; background-color: #ffffff; box-shadow: 0 0 10px rgba(0,0,0,0.05); height: 100%;">
     <h6 class="text-muted mb-4" style="margin-top: 60px;">Menu</h6>
@@ -76,9 +77,9 @@
         </li>
 
         <li class="nav-item mb-2">
-            @if ($activePage == 'laporan')
+            @if (Request::is('mahasiswa/laporan', 'mahasiswa/izin'))
                 <!-- Versi dengan border merah dan teks merah untuk menu aktif -->
-                <a href="/laporan" class="nav-link text-decoration-none"
+                <a href="/mahasiswa/laporan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/report-icon.svg') }}" alt="Laporan" width="18"
