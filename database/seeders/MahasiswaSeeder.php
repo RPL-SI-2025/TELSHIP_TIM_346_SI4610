@@ -3,24 +3,29 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Hash;
 
 class MahasiswaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        DB::table('mahasiswa')->insert([
-            'id_mahasiswa'   => 1, 
-            'nama_lengkap'   => 'Samuel Arjuna Queen Bernard',
-            'NIM'            => '102022480037',
-            'email'          => 'samuelarjunaqueen@student.telkomuniversity.ac.id',
-            'password'       => Hash::make('password'),
-            'created_at'     => now(),
-            'updated_at'     => now(),
+        Mahasiswa::create([
+            'nim' => '1202220000',
+            'nama' => 'Muhammad Naufal',
+            'email' => 'naufal@gmail.com',
+            'password' => Hash::make('Naufal123'),
+            'jurusan' => 'S1 Sistem Informasi',
+            'no_hp' => '082121112134'
+        ]);
+
+        Mahasiswa::create([
+            'nim' => '1202220001',
+            'nama' => 'Aulia Rahma',
+            'email' => 'aulia@gmail.com',
+            'password' => Hash::make('Rahma123'),
+            'jurusan' => 'S1 Teknik Informatika',
+            'no_hp' => '082132112135'
         ]);
     }
 }
