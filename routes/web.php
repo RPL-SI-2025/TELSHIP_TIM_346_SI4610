@@ -10,6 +10,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MentorController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -56,3 +57,11 @@ Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store
 // Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
 // Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mentor/lowongan', [MentorController::class, 'index'])->name('mentor.lowongan');
+    Route::post('/mentor/lowongan/store', [MentorController::class, 'storeLowongan'])->name('mentor.lowongan.store');
+    Route::get('/mentor/lowongan', [MentorController::class, 'showLowongan'])->name('mentor.lowongan');
+    Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
+});
+ 
