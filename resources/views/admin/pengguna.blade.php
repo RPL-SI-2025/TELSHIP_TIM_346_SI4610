@@ -49,8 +49,6 @@
     </style>
     <div class="d-flex" style="min-height: 100vh">
 
-        @include('partials_admin.sidebar_admin')
-
         <div class="flex-grow-1">
             <!-- Banner -->
             <div class="position-relative text-white"
