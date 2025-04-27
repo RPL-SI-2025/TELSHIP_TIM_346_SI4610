@@ -4,7 +4,6 @@
 
 @section('main')
     <h4 class="mb-4 fw-bold">Lowongan yang Menunggu Persetujuan</h4>
-
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

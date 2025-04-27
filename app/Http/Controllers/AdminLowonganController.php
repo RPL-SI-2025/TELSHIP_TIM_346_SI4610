@@ -9,14 +9,14 @@ class AdminLowonganController extends Controller
 {
     public function index()
     {
-        $jobs = AdminLowongan::where('status', 'pending')->get();
+        $jobs = AdminLowongan::where('status', 'menunggu')->get();
         return view('admin.lowongan.approval-request', compact('jobs'));
     }
 
     public function approve($id)
     {
         $job = AdminLowongan::findOrFail($id);
-        $job->status = 'approved';
+        $job->status = 'disetujui';
         $job->save();
 
         return redirect()->back()->with('success', 'Lowongan berhasil disetujui.');
@@ -25,7 +25,7 @@ class AdminLowonganController extends Controller
     public function reject($id)
     {
         $job = AdminLowongan::findOrFail($id);
-        $job->status = 'rejected';
+        $job->status = 'ditolak';
         $job->save();
 
         return redirect()->back()->with('success', 'Lowongan berhasil ditolak.');

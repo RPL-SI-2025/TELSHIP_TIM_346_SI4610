@@ -11,6 +11,7 @@ use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\AdminLowonganController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -70,4 +71,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mentor/lowongan', [MentorController::class, 'showLowongan'])->name('mentor.lowongan');
     Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
 });
- 
+
+Route::get('/admin/id-perusahaan/create', [CompanyController::class, 'create'])->name('company.create');
+Route::post('/admin/id-perusahaan', [CompanyController::class, 'store'])->name('company.store');
+Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowongan.index');
+Route::post('lowongan/{id}/approve', [AdminLowonganController::class, 'approve'])->name('lowongan.approve');
+Route::post('lowongan/{id}/reject', [AdminLowonganController::class, 'reject'])->name('lowongan.reject');
+Route::get('monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');
+
