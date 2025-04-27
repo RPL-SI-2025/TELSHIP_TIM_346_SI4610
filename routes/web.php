@@ -12,6 +12,7 @@ use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\AdminLowonganController;
+use App\Http\Controllers\MonitoringMahasiswaController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\CompanyController;
@@ -58,10 +59,10 @@ Route::get('/mahasiswa/status', [LaporanController::class, 'index_status'])->nam
 Route::post('/laporan', [LaporanController::class, 'store_laporan'])->name('laporan.store');
 Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store');
 
-// Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
-// Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
-// Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
-//route seleski pelamar
+Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
+Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
+Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
+// route seleski pelamar
 Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
 Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
 Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
@@ -82,3 +83,4 @@ Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowonga
 Route::post('lowongan/{id}/approve', [AdminLowonganController::class, 'approve'])->name('lowongan.approve');
 Route::post('lowongan/{id}/reject', [AdminLowonganController::class, 'reject'])->name('lowongan.reject');
 Route::get('monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');
+
