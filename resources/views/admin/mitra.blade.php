@@ -2,7 +2,6 @@
 
 @section('main')
     <style>
-        /* Tetap gunakan CSS styling dari mahasiswa */
         body {
             background-color: white !important;
         }
@@ -60,9 +59,9 @@
 
             <div class="d-flex gap-2 mt-1 p-4">
                 <a href="{{ url('admin/pengguna') }}" class="btn btn-outline-secondary text-muted">MAHASISWA</a>
-                <a class="btn fw-semibold" href="{{ url('admin/mentor') }}"
-                    style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MENTOR</a>
-                <a href="{{ url('admin/mitra') }}" class="btn btn-outline-secondary text-muted">MITRA</a>
+                <a href="{{ url('admin/mentor') }}" class="btn btn-outline-secondary text-muted">MENTOR</a>
+                <a class="btn fw-semibold" href="{{ url('admin/mitra') }}"
+                    style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MITRA</a>
             </div>
 
             <!-- Success or Error Messages -->
@@ -80,33 +79,38 @@
                     <table class="table table-striped border">
                         <thead>
                             <tr>
-                                <th>ID Mentor</th>
-                                <th>Nama Lengkap</th>
-                                <th>Email</th>
                                 <th>ID Perusahaan</th>
+                                <th>Nama Perusahaan</th>
+                                <th>Email</th>
+                                <th>Telepon</th>
+                                <th>Alamat</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($usermentor as $mnt)
+                            @foreach ($mitra as $mtr)
                                 <tr>
-                                    <td>{{ $mnt->id_mentor }}</td>
-                                    <td>{{ $mnt->nama_lengkap }}</td>
-                                    <td>{{ $mnt->email }}</td>
-                                    <td>{{ $mnt->id_perusahaan }}</td>
+                                    <td>{{ $mtr->id_perusahaan }}</td>
+                                    <td>{{ $mtr->nama_perusahaan }}</td>
+                                    <td>{{ $mtr->email }}</td>
+                                    <td>{{ $mtr->telepon }}</td>
+                                    <td>{{ $mtr->alamat }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <button class="action-btn edit-btn"
-                                                data-id="{{ $mnt->user_id }}"
-                                                data-nama_lengkap="{{ $mnt->nama_lengkap }}"
-                                                data-email="{{ $mnt->email }}"
-                                                data-id_perusahaan="{{ $mnt->id_perusahaan }}"
+                                                data-id="{{ $mtr->id_perusahaan }}"
+                                                data-nama_perusahaan="{{ $mtr->nama_perusahaan }}"
+                                                data-email="{{ $mtr->email }}"
+                                                data-telepon="{{ $mtr->telepon }}"
+                                                data-alamat="{{ $mtr->alamat }}"
+                                                data-deskripsi_perusahaan="{{ $mtr->deskripsi_perusahaan }}"
+                                                data-link_website="{{ $mtr->link_website }}"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editModal">
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
-                                            <form action="{{ url('admin/mentor/delete/' . $mnt->id_mentor) }}" method="POST">
+                                            <form action="{{ url('admin/mitra/delete/' . $mtr->id_perusahaan) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="action-btn delete-btn"
@@ -119,9 +123,9 @@
                                 </tr>
                             @endforeach
 
-                            @if (count($usermentor) == 0)
+                            @if (count($mitra) == 0)
                                 <tr>
-                                    <td colspan="5" class="text-center">Tidak ada data mentor</td>
+                                    <td colspan="6" class="text-center">Tidak ada data mitra</td>
                                 </tr>
                             @endif
                         </tbody>
@@ -130,7 +134,7 @@
 
                 <!-- Pagination -->
                 <nav>
-                    {{ $usermentor->links('pagination::bootstrap-5') }}
+                    {{ $mitra->links('pagination::bootstrap-5') }}
                 </nav>
             </div>
         </div>
@@ -141,7 +145,7 @@
         <div class="modal-dialog">
             <div class="modal-content rounded-4 shadow">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title text-white" id="editModalLabel">Edit Mentor</h5>
+                    <h5 class="modal-title text-white" id="editModalLabel">Edit Mitra</5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="edit-form" method="POST">
@@ -149,16 +153,28 @@
                     @method('PUT')
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="edit-nama_lengkap" class="form-label">Nama Lengkap</label>
-                            <input type="text" name="nama_lengkap" id="edit-nama_lengkap" class="form-control" required>
+                            <label for="edit-nama_perusahaan" class="form-label">Nama Perusahaan</label>
+                            <input type="text" name="nama_perusahaan" id="edit-nama_perusahaan" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit-email" class="form-label">Email</label>
                             <input type="email" name="email" id="edit-email" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit-id_perusahaan" class="form-label">ID Perusahaan</label>
-                            <input type="number" name="id_perusahaan" id="edit-id_perusahaan" class="form-control" required>
+                            <label for="edit-telepon" class="form-label">Telepon</label>
+                            <input type="text" name="telepon" id="edit-telepon" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-alamat" class="form-label">Alamat</label>
+                            <input type="text" name="alamat" id="edit-alamat" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-deskripsi_perusahaan" class="form-label">Deskripsi Perusahaan</label>
+                            <textarea name="deskripsi_perusahaan" id="edit-deskripsi_perusahaan" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-link_website" class="form-label">Link Website</label>
+                            <input type="url" name="link_website" id="edit-link_website" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -177,15 +193,21 @@
         $(document).ready(function() {
             $('.edit-btn').on('click', function() {
                 var id = $(this).data('id');
-                var nama_lengkap = $(this).data('nama_lengkap');
+                var nama_perusahaan = $(this).data('nama_perusahaan');
                 var email = $(this).data('email');
-                var id_perusahaan = $(this).data('id_perusahaan');
+                var telepon = $(this).data('telepon');
+                var alamat = $(this).data('alamat');
+                var deskripsi_perusahaan = $(this).data('deskripsi_perusahaan');
+                var link_website = $(this).data('link_website');
 
-                $('#edit-nama_lengkap').val(nama_lengkap);
+                $('#edit-nama_perusahaan').val(nama_perusahaan);
                 $('#edit-email').val(email);
-                $('#edit-id_perusahaan').val(id_perusahaan);
+                $('#edit-telepon').val(telepon);
+                $('#edit-alamat').val(alamat);
+                $('#edit-deskripsi_perusahaan').val(deskripsi_perusahaan);
+                $('#edit-link_website').val(link_website);
 
-                $('#edit-form').attr('action', '/admin/mentor/update/' + id);
+                $('#edit-form').attr('action', '/admin/mitra/update/' + id);
             });
 
             $('#edit-form').submit(function(e) {
@@ -200,7 +222,7 @@
                     data: formData,
                     success: function(response) {
                         $('#editModal').modal('hide');
-                        showAlert('success', 'Data mentor berhasil diperbarui.');
+                        showAlert('success', 'Data mitra berhasil diperbarui.');
                         setTimeout(function() {
                             location.reload();
                         }, 1000);

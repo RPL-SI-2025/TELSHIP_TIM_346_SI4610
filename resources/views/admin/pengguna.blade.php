@@ -61,7 +61,7 @@
                 <a class="btn fw-semibold" href="{{ url('admin/pengguna') }}"
                     style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MAHASISWA</a>
                 <a href="{{ url('admin/mentor') }}" class="btn btn-outline-secondary text-muted">MENTOR</a>
-                <a href="{{ url('admin/mitra') }}" class="btn btn-outline-secondary text-muted">ID PERUSAHAAN</a>
+                <a href="{{ url('admin/mitra') }}" class="btn btn-outline-secondary text-muted">MITRA</a>
             </div>
 
             <!-- Success or Error Messages -->
