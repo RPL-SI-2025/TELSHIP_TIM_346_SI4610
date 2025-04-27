@@ -1,7 +1,7 @@
 @php
-    $activePage = request()->segment(1);
+    $activePage = request()->segment(2);
     if (empty($activePage)) {
-        $activePage = 'profile';
+        $activePage = 'pengguna';
     }
     $activePage = $activePage ?? '';
 @endphp
@@ -10,22 +10,22 @@
 
     <ul class="nav flex-column" style="list-style: none; padding-left: 0;">
         <li class="nav-item mb-2">
-            @if (Request::is('mahasiswa/profile'))
-                <a href="/mahasiswa/profile" class="nav-link text-decoration-none"
+            @if ($activePage == 'pengguna')
+                <a href="/admin/pengguna" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
-                    <span style="color: #e74c3c; font-weight: 600;">
+                    <span style="color: #6c757d; font-weight: 600;">
                         <img src="{{ asset('assets/icons/profile-icon.svg') }}" alt="Profile" width="18"
                             style="margin-right: 8px;">
-                        PROFILE
+                        PENGGUNA
                     </span>
                 </a>
             @else
-                <a href="/mahasiswa/profile" class="nav-link text-decoration-none"
+                <a href="/admin/pengguna" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/profile-icon-no.svg') }}" alt="Profile" width="18"
                             style="margin-right: 8px;">
-                        PROFILE
+                        PENGGUNA
                     </span>
                 </a>
             @endif
@@ -52,29 +52,6 @@
                 </a>
             @endif
         </li>
-
-        <li class="nav-item mb-2">
-            @if ($activePage == 'status')
-                <a href="/mahasiswa/status" class="nav-link text-decoration-none"
-                    style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
-                    <span style="color: #e74c3c; font-weight: 600;">
-                        <img src="{{ asset('assets/icons/status-icon.svg') }}" alt="Status" width="18"
-                            style="margin-right: 8px;">
-                        STATUS
-                    </span>
-                </a>
-            @else
-                <a href="/mahasiswa/status" class="nav-link text-decoration-none"
-                    style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
-                    <span style="color: #a0a0a0; font-weight: 400;">
-                        <img src="{{ asset('assets/icons/status-icon-no.svg') }}" alt="Status" width="18"
-                            style="margin-right: 8px;">
-                        STATUS
-                    </span>
-                </a>
-            @endif
-        </li>
-
         <li class="nav-item mb-2">
             @if (Request::is('mahasiswa/laporan', 'mahasiswa/izin', 'mahasiswa/status'))
                 <!-- Versi dengan border merah dan teks merah untuk menu aktif -->
@@ -88,7 +65,7 @@
                 </a>
             @else
                 <!-- Versi dengan latar belakang abu-abu untuk menu tidak aktif -->
-                <a href="/mahasiswa/laporan" class="nav-link text-decoration-none"
+                <a href="/laporan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/report-icon-no.svg') }}" alt="Laporan" width="18"

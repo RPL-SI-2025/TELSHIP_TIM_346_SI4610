@@ -64,9 +64,11 @@
     <link rel="stylesheet" href="{{ url('app-assets/vendor/css/pages/cards-advance.css') }}" />
     <link rel="stylesheet" href="{{ url('app-assets/vendor/css/pages/ui-carousel.css') }}" />
     <link rel="stylesheet" href="{{ url('app-assets/vendor/libs/dropzone/dropzone.css') }}" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Helpers -->
     <script src="{{ url('app-assets/vendor/js/helpers.js') }}"></script>
@@ -75,8 +77,8 @@
     @yield('page_style')
     <style>
         .dropdown-menu {
-
             z-index: 9999;
+            min-width: 10rem;
         }
 
 
@@ -331,11 +333,10 @@
 
                         <!-- User -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center"
-                                href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
-
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="avatar me-3 mt-n1">
-                                    @if ($mahasiswa->foto_profile)
+                                    {{-- @if ($mahasiswa->foto_profile)
                                         <img src="{{ Storage::url('fotos/' . $mahasiswa->foto_profile) }}"
                                             alt="Foto Profil" style="width: 50px; height: 50px; object-fit: cover;"
                                             class="rounded-circle"
@@ -344,26 +345,28 @@
                                         <img src="{{ asset('images/default-profile.png') }}" alt="Foto Default"
                                             style="width: 50px; height: 50px; object-fit: cover;"
                                             class="rounded-circle">
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <span class="fw-medium text-dark">{{ Auth::user()->name }}</span>
                             </a>
 
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#"><i class="ti ti-user me-2"></i>
-                                        Profil</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" style="position: absolute;"
+                                data-bs-popper="static">
+                                <li><a class="dropdown-item" href="{{ route('mahasiswa.index') }}"><i
+                                            class="ti ti-user me-2"></i>Profil</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    <a class="dropdown-item" href="#"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="ti ti-logout me-2"></i>Logout
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="ti ti-logout me-2"></i> Logout
-                                        </button>
                                     </form>
                                 </li>
-
                             </ul>
                         </li>
                     </ul>
