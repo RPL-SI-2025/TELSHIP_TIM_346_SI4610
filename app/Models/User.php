@@ -1,28 +1,36 @@
 <?php
-
+ 
 namespace App\Models;
-
+ 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
+ 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
+ 
+    protected $fillable = [
+       
+        'name',
+        'email',
+        'password',
+        'role',
+        'id_perusahaan',
+    ];
+ 
     public function mahasiswa()
     {
-        return $this->hasOne(\App\Models\Mahasiswa::class, 'user_id', 'id');
+        return $this->hasOne(Mahasiswa::class);
     }
-
-    public function lowongans()
+ 
+    public function admin()
     {
-        return $this->hasMany(Lowongan::class, 'mentor_id');
+        return $this->hasOne(Admin::class);
     }
-
-    public function pelamars()
+ 
+    public function mentor()
     {
-        return $this->hasMany(Pelamar::class, 'mahasiswa_id');
+        return $this->hasOne(UserMentor::class);
     }
 }

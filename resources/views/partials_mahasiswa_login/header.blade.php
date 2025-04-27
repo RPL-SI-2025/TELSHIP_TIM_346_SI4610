@@ -64,12 +64,22 @@
     <link rel="stylesheet" href="{{ url('app-assets/vendor/css/pages/cards-advance.css') }}" />
     <link rel="stylesheet" href="{{ url('app-assets/vendor/css/pages/ui-carousel.css') }}" />
     <link rel="stylesheet" href="{{ url('app-assets/vendor/libs/dropzone/dropzone.css') }}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
     <!-- Helpers -->
     <script src="{{ url('app-assets/vendor/js/helpers.js') }}"></script>
 
 
     @yield('page_style')
     <style>
+        .dropdown-menu {
+
+            z-index: 9999;
+        }
+
+
         .bg-menu-theme.menu-vertical .menu-item.active>.menu-link:not(.menu-toggle) {
             background: #4EA971 !important;
             box-shadow: none !important;
@@ -321,26 +331,41 @@
 
                         <!-- User -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="#"
-                                data-bs-toggle="dropdown">
-                                <div class="avatar avatar-online me-2">
-                                    <img src="{{ asset('app-assets/img/avatars/1.png') }}" alt="User Avatar"
-                                        class="rounded-circle" width="32" height="32" />
+                            <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center"
+                                href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                <div class="avatar me-3 mt-n1">
+                                    @if ($mahasiswa->foto_profile)
+                                        <img src="{{ Storage::url('fotos/' . $mahasiswa->foto_profile) }}"
+                                            alt="Foto Profil" style="width: 50px; height: 50px; object-fit: cover;"
+                                            class="rounded-circle"
+                                            onerror="this.src='{{ asset('app-assets/img/avatars/1.png') }}'">
+                                    @else
+                                        <img src="{{ asset('images/default-profile.png') }}" alt="Foto Default"
+                                            style="width: 50px; height: 50px; object-fit: cover;"
+                                            class="rounded-circle">
+                                    @endif
                                 </div>
-                                <span class="fw-medium text-dark">Alexa</span>
+                                <span class="fw-medium text-dark">{{ Auth::user()->name }}</span>
                             </a>
+
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="ti ti-user me-2"></i>
                                         Profil</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ti ti-settings me-2"></i>
-                                        Pengaturan</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href=""><i
-                                            class="ti ti-logout me-2"></i> Logout</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="ti ti-logout me-2"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+
                             </ul>
                         </li>
                     </ul>
-
+                </div>
             </nav>

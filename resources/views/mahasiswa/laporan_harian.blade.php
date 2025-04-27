@@ -14,8 +14,8 @@
                     UPLOAD LAPORAN
                 </button>
 
-                <button class="btn btn-outline-secondary text-muted" disabled>STATUS LAPORAN</button>
-                <button class="btn btn-outline-secondary text-muted" disabled>MINTA IZIN</button>
+                <button class="btn btn-outline-secondary text-muted">STATUS LAPORAN</button>
+                <a href="{{ url('mahasiswa/izin') }}" class="btn btn-outline-secondary text-muted">MINTA IZIN</a>
             </div>
 
 
@@ -38,7 +38,7 @@
                                 placeholder="Tuliskan kegiatanmu hari ini..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-danger w-100 rounded-pill mt-3"
-                            style="background-color: #d60000; border-color: #b50000;">Kirim Laporan</button>
+                            style="background-color: #EC1D24;">Kirim Laporan</button>
                         @if (session('success'))
                             <div class="alert alert-success mt-3">
                                 {{ session('success') }}

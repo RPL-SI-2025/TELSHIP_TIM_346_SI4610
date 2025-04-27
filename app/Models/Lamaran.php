@@ -9,17 +9,24 @@ class Lamaran extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-
     protected $table = 'lamaran';
+    protected $primaryKey = 'id_lamaran';
 
-    public function pelamar()
+    protected $fillable = [
+        'id_mahasiswa',
+        'id_lowongan',
+        'tanggal_lamaran',
+        'status',
+    ];
+
+
+    public function mahasiswa()
     {
-        return $this->belongsTo(Pelamar::class, 'pelamar_id');
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa', 'id_mahasiswa');
     }
 
     public function lowongan()
     {
-        return $this->belongsTo(Lowongan::class, 'id_lowongan'); 
+        return $this->belongsTo(Lowongan::class, 'id_lowongan', 'id_lowongan');
     }
 }
