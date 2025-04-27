@@ -15,6 +15,8 @@ use App\Http\Controllers\AdminLowonganController;
 use App\Http\Controllers\MonitoringMahasiswaController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MonitoringMahasiswaController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
