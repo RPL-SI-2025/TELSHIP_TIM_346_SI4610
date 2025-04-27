@@ -12,6 +12,7 @@ use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\AdminLowonganController;
+use App\Http\Controllers\MonitoringMahasiswaController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');

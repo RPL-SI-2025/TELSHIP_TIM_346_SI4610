@@ -10,7 +10,7 @@ class AdminLowonganController extends Controller
     public function index()
     {
         $jobs = AdminLowongan::where('status', 'menunggu')->get();
-        return view('admin.lowongan.approval-request', compact('jobs'));
+        return view('admin.lowongan.approval-request', ['jobs' => $jobs, 'activePage' => 'lowongan'], compact('jobs'));
     }
 
     public function approve($id)

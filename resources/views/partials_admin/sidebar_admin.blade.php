@@ -1,7 +1,7 @@
 @php
     $activePage = request()->segment(2);
     if (empty($activePage)) {
-        $activePage = 'pengguna';
+        $activePage = '';
     }
     $activePage = $activePage ?? '';
 @endphp
@@ -32,8 +32,8 @@
         </li>
 
         <li class="nav-item mb-2">
-            @if (Request::is('mahasiswa/lowongan', 'mahasiswa/lowongan/*'))
-                <a href="/mahasiswa/laporan" class="nav-link text-decoration-none"
+            @if (Request::is('lowongan'))
+                <a href="/lowongan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/lowongan-icon.svg') }}" alt="Lowongan" width="18"
@@ -42,7 +42,7 @@
                     </span>
                 </a>
             @else
-                <a href="/mahasiswa/lowongan" class="nav-link text-decoration-none"
+                <a href="/lowongan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/lowongan-icon-no.svg') }}" alt="Lowongan" width="18"
@@ -53,24 +53,24 @@
             @endif
         </li>
         <li class="nav-item mb-2">
-            @if (Request::is('mahasiswa/laporan', 'mahasiswa/izin', 'mahasiswa/status'))
+            @if (Request::is('monitoring/mahasiswa'))
                 <!-- Versi dengan border merah dan teks merah untuk menu aktif -->
-                <a href="/mahasiswa/laporan" class="nav-link text-decoration-none"
+                <a href="/monitoring/mahasiswa" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/report-icon.svg') }}" alt="Laporan" width="18"
                             style="margin-right: 8px;">
-                        LAPORAN
+                        MONITORING
                     </span>
                 </a>
             @else
                 <!-- Versi dengan latar belakang abu-abu untuk menu tidak aktif -->
-                <a href="/laporan" class="nav-link text-decoration-none"
+                <a href="/monitoring/mahasiswa" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/report-icon-no.svg') }}" alt="Laporan" width="18"
                             style="margin-right: 8px;">
-                        LAPORAN
+                        MONITORING
                     </span>
                 </a>
             @endif

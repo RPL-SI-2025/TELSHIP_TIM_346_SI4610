@@ -3,6 +3,10 @@
 @section('title', 'Approval Lowongan')
 
 @section('main')
+<div style="margin-left: 250px;"> <!-- sesuaikan 250px dengan lebar sidebar -->
+    <!-- ISI LOWONGAN DISINI -->
+</div>
+
     <h4 class="mb-4 fw-bold">Lowongan yang Menunggu Persetujuan</h4>
     @if(session('success'))
         <div class="alert alert-success">
