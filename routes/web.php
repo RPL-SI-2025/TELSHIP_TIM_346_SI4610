@@ -59,7 +59,7 @@ Route::post('/laporan', [LaporanController::class, 'store_laporan'])->name('lapo
 Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store');
 
 Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
-// Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
+Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
 Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
 // route seleski pelamar
 Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');

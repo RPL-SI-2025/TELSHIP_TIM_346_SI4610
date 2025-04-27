@@ -1,20 +1,15 @@
 @extends('partials_mahasiswa_login.template')
 
 @section('main')
-    {{-- ganti dari 'content' ke 'main' --}}
     <div class="d-flex" style="min-height: 100vh">
 
-        {{-- Sidebar --}}
         @include('partials_mahasiswa_login.sidebar_mahasiswa')
 
-        {{-- Konten Utama --}}
         <div class="flex-grow-1 p-4" style="margin-top: 60px;">
             <div class="d-flex gap-2">
-                <button class="btn fw-semibold" style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">
-                    UPLOAD LAPORAN
-                </button>
-
-                <button class="btn btn-outline-secondary text-muted">STATUS LAPORAN</button>
+                <a class="btn fw-semibold" href="{{ url('mahasiswa/laporan') }}"
+                    style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">UPLOAD LAPORAN</a>
+                <a href="{{ url('mahasiswa/status') }}" class="btn btn-outline-secondary text-muted">STATUS LAPORAN</a>
                 <a href="{{ url('mahasiswa/izin') }}" class="btn btn-outline-secondary text-muted">MINTA IZIN</a>
             </div>
 

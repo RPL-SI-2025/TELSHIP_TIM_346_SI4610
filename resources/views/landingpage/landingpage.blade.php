@@ -284,10 +284,17 @@
             </p>
 
             <div class="button-group">
-                <button class="btn btn-danger me-2" type="button"
-                    style="background-color: #d60000; border-color: #b50000;">Jelajahi
-                    Program Magang</button>
-                <button class="btn btn-secondary-custom">Daftar Sekarang</button>
+                <!-- Button untuk Jelajahi Program Magang -->
+                <a href="{{ url('/mahasiswa/lowongan') }}" class="btn"
+                    style="background-color: #d60000; border-color: #b50000; color: white; text-decoration: none;">
+                    Jelajahi Program Magang
+                </a>
+
+                <!-- Button untuk Daftar Sekarang -->
+                <a href="{{ url('/mahasiswa/profile') }}" class="btn btn-secondary-custom"
+                    style="background-color: #6c757d; color: white; text-decoration: none;">
+                    Daftar Sekarang
+                </a>
             </div>
 
             <div class="gallery-container">
@@ -357,47 +364,43 @@
                 Didampingi Langsung Oleh Dosen Ahli Di Bidangnya.
             </p>
 
-            <div class="card">
-                <div class="card-left">
-                    <h3>Front-End Developer</h3>
-                    <p>Dibuka Sampai 10 Maret 2025</p>
-                    <p>Bangun Dan Optimalkan Aplikasi Perangkat Lunak Dengan Prinsip Clean Code, Didukung Oleh Dosen
-                        Teknologi Informasi.</p>
-                    <p class="quota">
-                        <img src="{{ asset('assets/icons/user.svg') }}" alt="icon"> Kuota: 3 Orang
-                    </p>
+            @foreach ($lowongans as $lowongan)
+                <div class="col-6 mb-4">
+                    <a href="{{ route('lowongan.detail', $lowongan->id_lowongan) }}" class="text-decoration-none">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title fw-bold">{{ $lowongan->nama_posisi }}</h5>
+                                    <span class="badge"
+                                        style="background-color: #e1bee7; color: #424040; border: 2px solid #8e24aa; border-radius: 15px; padding: 5px 10px; display: inline-block; text-align: center; line-height: 20px;">
+                                        {{ $lowongan->userMentor->mitra->nama_perusahaan }}
+                                    </span>
+                                </div>
+                                <div class="mb-3">
+                                    <small style="color: #6c757d;">Dibuka Sampai:
+                                        {{ \Carbon\Carbon::parse($lowongan->dibuka_sampai)->format('d M Y') }}</small>
+                                </div>
+                                <p class="card-text" style="font-size: 14px; color: #000000;">
+                                    {{ $lowongan->deskripsi_pekerjaan }}
+                                </p>
+                                <div class="mt-3">
+                                    <span style="font-size: 14px; color: #6c757d;">
+                                        <img src="{{ asset('assets/icons/user.svg') }}" alt="icon"> Kuota:
+                                        {{ $lowongan->jumlah_kuota }} Orang
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <span class="badge kemahasiswaan text-dark">Kemahasiswaan</span>
-            </div>
+            @endforeach
 
-            <div class="card">
-                <div class="card-left">
-                    <h3>Front-End Developer</h3>
-                    <p>Dibuka Sampai 10 Maret 2025</p>
-                    <p>Bangun Dan Optimalkan Aplikasi Perangkat Lunak Dengan Prinsip Clean Code, Didukung Oleh Dosen
-                        Teknologi Informasi.</p>
-                    <p class="quota">
-                        <img src="{{ asset('assets/icons/user.svg') }}" alt="icon"> Kuota: 3 Orang
-                    </p>
-                </div>
-                <span class="badge open-library text-dark">Open Library</span>
-            </div>
 
-            <div class="card">
-                <div class="card-left">
-                    <h3>Front-End Developer</h3>
-                    <p>Dibuka Sampai 10 Maret 2025</p>
-                    <p>Bangun Dan Optimalkan Aplikasi Perangkat Lunak Dengan Prinsip Clean Code, Didukung Oleh Dosen
-                        Teknologi Informasi.</p>
-                    <p class="quota">
-                        <img src="{{ asset('assets/icons/user.svg') }}" alt="icon"> Kuota: 3 Orang
-                    </p>
-                </div>
-                <span class="badge language-center text-dark">Language Center</span>
-            </div>
+            <!-- Tombol Lihat Semua -->
             <div class="lihat-semua-container">
-                <button class="btn btn-light btn-lihat-semua">Lihat Semua</button>
+                <a href="{{ url('mahasiswa/lowongan') }}" class="btn btn-light btn-lihat-semua">Lihat Semua</a>
             </div>
+
 
         </div>
     </main>
