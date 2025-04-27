@@ -337,28 +337,39 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Login dan Daftar -->
-
                         @php
                             $user = Auth::user();
                         @endphp
+
                         @if (!$user)
                             <ul class="navbar-nav flex-row align-items-center ms-auto">
-                                <a href="{{ url('/register') }}">
-                                    <button class="btn btn-danger me-2" type="button"
-                                        style="background-color: #d60000; border-color: #b50000;">
-                                        Register
-                                    </button>
-                                </a>
-                                <a href="{{ url('/login') }}">
-                                    <button class="btn btn-light me-2" type="button" style="border-color: #ffffff;">
-                                        Login
-                                    </button>
-                                </a>
+                                <li class="nav-item">
+                                    <a href="{{ url('/register') }}">
+                                        <button class="btn btn-danger me-2" type="button"
+                                            style="background-color: #d60000; border-color: #b50000;">
+                                            Register
+                                        </button>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/login') }}">
+                                        <button class="btn btn-light me-2" type="button"
+                                            style="border-color: #ffffff;">
+                                            Login
+                                        </button>
+                                    </a>
+                                </li>
                             </ul>
                         @else
+                            {{-- Ini nanti kalau user sudah login mau ngapain, contoh: munculin nama user atau tombol logout --}}
+                            <ul class="navbar-nav flex-row align-items-center ms-auto">
+                                <li class="nav-item">
+                                    <span class="nav-link">{{ $user->name }}</span>
+                                </li>
+                            </ul>
+                        @endif
                     </div>
-                    @endif
+
                 </div>
             </nav>
 
