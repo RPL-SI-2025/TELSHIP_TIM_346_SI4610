@@ -1,9 +1,9 @@
 <?php
-
+ 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+ 
 return new class extends Migration
 {
     /**
@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('lamaran', function (Blueprint $table) {
             $table->id('id_lamaran');
-            $table->unsignedBigInteger('pelamar_id');
-            $table->unsignedBigInteger('id_lowongan'); 
+            $table->unsignedBigInteger('id_mahasiswa');
+            $table->unsignedBigInteger('id_lowongan');
             $table->date('tanggal_lamaran');
             $table->enum('status', ['lolos', 'ditolak', 'diproses']);
             $table->timestamps();
-    
-            $table->foreign('pelamar_id')->references('id')->on('pelamars')->onDelete('cascade');
+ 
+            $table->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswa')->onDelete('cascade');
             $table->foreign('id_lowongan')->references('id_lowongan')->on('lowongan')->onDelete('cascade');
-        });
+    });
 }
-
-
+ 
+ 
     /**
      * Reverse the migrations.
      */
