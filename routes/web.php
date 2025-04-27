@@ -16,7 +16,6 @@ use App\Http\Controllers\MonitoringMahasiswaController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\MonitoringMahasiswaController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -60,7 +59,7 @@ Route::post('/laporan', [LaporanController::class, 'store_laporan'])->name('lapo
 Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store');
 
 Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
-Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
+// Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
 Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
 // route seleski pelamar
 Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
@@ -84,3 +83,7 @@ Route::post('lowongan/{id}/approve', [AdminLowonganController::class, 'approve']
 Route::post('lowongan/{id}/reject', [AdminLowonganController::class, 'reject'])->name('lowongan.reject');
 Route::get('monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');
 
+Route::get('/admin/lowongan/approval', [LowonganController::class, 'approvalIndex'])->name('lowongan.approval');
+// Route::get('/admin/lowongan/{id}', [LowonganController::class, 'detailAdmin'])->name('lowongan.detail');
+Route::post('/admin/lowongan/{id}/approve', [LowonganController::class, 'approve'])->name('lowongan.approve');
+Route::post('/admin/lowongan/{id}/reject', [LowonganController::class, 'reject'])->name('lowongan.reject');
