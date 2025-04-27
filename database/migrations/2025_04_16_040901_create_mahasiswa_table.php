@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id('id_mahasiswa');
             $table->string('nama_lengkap', 100);
-            $table->string('NIM', 20)->unique();
+            $table->string('nim', 20)->unique();
             $table->string('email', 100)->unique();
             $table->string('password', 255);
+            $table->string('jurusan', 100); 
+            $table->string('no_hp', 20);    
             $table->timestamps();
         });
     }
