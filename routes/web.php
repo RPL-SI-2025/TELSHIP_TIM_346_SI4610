@@ -53,9 +53,9 @@ Route::get('/mahasiswa/status', [LaporanController::class, 'index_status'])->nam
 Route::post('/laporan', [LaporanController::class, 'store_laporan'])->name('laporan.store');
 Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store');
 
-// Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
-// Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
-// Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
+Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
+Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
+Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
 });
 
 Route::middleware(['auth'])->group(function () {
