@@ -25,7 +25,7 @@ class LoginController extends Controller
                 case 'mahasiswa':
                     return redirect()->intended('/mahasiswa/profile');
                 case 'mentor':
-                    return redirect()->intended('/mentor/dashboard');
+                    return redirect()->intended('/mentor/lowongan');
                 case 'admin':
                     return redirect()->intended('/admin/pengguna');
                 default:
