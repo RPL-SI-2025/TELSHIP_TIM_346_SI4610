@@ -58,11 +58,17 @@
                 <img src="{{ asset('assets/images/ft3.svg') }}" alt="Banner" class="position-absolute end-0 top-0 h-100">
             </div>
 
-            <div class="d-flex gap-2 mt-1 p-4">
-                <a href="{{ url('admin/pengguna') }}" class="btn btn-outline-secondary text-muted">MAHASISWA</a>
-                <a class="btn fw-semibold" href="{{ url('admin/mentor') }}"
-                    style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MENTOR</a>
-                <a href="{{ url('admin/mitra') }}" class="btn btn-outline-secondary text-muted">MITRA</a>
+            <div class="d-flex gap-2 mt-1 p-4 justify-content-between align-items-center">
+                <!-- Menu Box di Pojok Kiri -->
+                <div class="d-flex gap-2">
+                    <a href="{{ url('admin/pengguna') }}" class="btn btn-outline-secondary text-muted">MAHASISWA</a>
+                    <a class="btn fw-semibold" href="{{ url('admin/mentor') }}"
+                        style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MENTOR</a>
+                    <a href="{{ url('admin/mitra') }}" class="btn btn-outline-secondary text-muted">MITRA</a>
+                </div>
+
+                <!-- Add Mentor Button di Pojok Kanan -->
+                <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add Mentor</button>
             </div>
 
             <!-- Success or Error Messages -->
@@ -157,13 +163,60 @@
                             <input type="email" name="email" id="edit-email" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit-id_perusahaan" class="form-label">ID Perusahaan</label>
-                            <input type="number" name="id_perusahaan" id="edit-id_perusahaan" class="form-control" required>
+                            <label for="edit-id_perusahaan" class="form-label">Nama Perusahaan</label>
+                            <select name="id_perusahaan" id="edit-id_perusahaan" class="form-control" required>
+                                <option value="">Pilih Perusahaan</option>
+                                @foreach ($mitra as $m)
+                                    <option value="{{ $m->id_perusahaan }}">{{ $m->nama_perusahaan }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-danger">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title text-white" id="addModalLabel">Tambah Mentor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="add-form" method="POST" action="{{ url('admin/mentor/store') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="add-nama_lengkap" class="form-label">Nama Lengkap</label>
+                            <input type="text" name="nama_lengkap" id="add-nama_lengkap" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="add-email" class="form-label">Email</label>
+                            <input type="email" name="email" id="add-email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="add-password" class="form-label">Password</label>
+                            <input type="password" name="password" id="add-password" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="add-id_perusahaan" class="form-label">Nama Perusahaan</label>
+                            <select name="id_perusahaan" id="add-id_perusahaan" class="form-control" required>
+                                <option value="">Pilih Perusahaan</option>
+                                @foreach ($mitra as $m)
+                                    <option value="{{ $m->id_perusahaan }}">{{ $m->nama_perusahaan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-danger">Tambah Mentor</button>
                     </div>
                 </form>
             </div>
@@ -183,7 +236,7 @@
 
                 $('#edit-nama_lengkap').val(nama_lengkap);
                 $('#edit-email').val(email);
-                $('#edit-id_perusahaan').val(id_perusahaan);
+                $('#edit-id_perusahaan').val(id_perusahaan); // Set nilai dropdown
 
                 $('#edit-form').attr('action', '/admin/mentor/update/' + id);
             });
@@ -208,6 +261,35 @@
                     error: function(xhr) {
                         var errors = xhr.responseJSON.errors;
                         var errorMessage = 'Gagal memperbarui data.';
+                        if (errors) {
+                            errorMessage = Object.values(errors).join('<br>');
+                        }
+                        showAlert('danger', errorMessage);
+                    }
+                });
+            });
+
+            // Script untuk add
+            $('#add-form').submit(function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var formData = form.serialize();
+                var actionUrl = form.attr('action');
+
+                $.ajax({
+                    type: "POST",
+                    url: actionUrl,
+                    data: formData,
+                    success: function(response) {
+                        $('#addModal').modal('hide');
+                        showAlert('success', 'Data mentor berhasil ditambahkan.');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    },
+                    error: function(xhr) {
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = 'Gagal menambahkan data.';
                         if (errors) {
                             errorMessage = Object.values(errors).join('<br>');
                         }
