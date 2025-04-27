@@ -13,9 +13,10 @@
                 <a href="{{ url('/mahasiswa/laporan') }}" class="btn btn-outline-secondary text-muted"class="btn fw-semibold">
                     UPLOAD LAPORAN
                 </a>
-
-                <button class="btn btn-outline-secondary text-muted">STATUS LAPORAN</button>
-                <a class="btn fw-semibold" href="{{ url('mahasiswa/izin') }}"  style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MINTA IZIN</a>
+                <a href="{{ url('/mahasiswa/status') }}"
+                    class="btn btn-outline-secondary text-muted"class="btn fw-semibold">STATUS LAPORAN</a>
+                <a class="btn fw-semibold" href="{{ url('mahasiswa/izin') }}"
+                    style="color: #dc3545; border: 2px solid #dc3545; pointer-events: none;">MINTA IZIN</a>
             </div>
 
 
