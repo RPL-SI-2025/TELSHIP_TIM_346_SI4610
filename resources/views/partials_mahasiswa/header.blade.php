@@ -336,7 +336,8 @@
                         </a>
                     </div>
 
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <div class="navbar-nav-right d-flex align-items-center justify-content-center"
+                        id="navbar-collapse">
                         @php
                             $user = Auth::user();
                         @endphp
@@ -361,14 +362,45 @@
                                 </li>
                             </ul>
                         @else
-                            {{-- Ini nanti kalau user sudah login mau ngapain, contoh: munculin nama user atau tombol logout --}}
-                            <ul class="navbar-nav flex-row align-items-center ms-auto">
-                                <li class="nav-item">
-                                    <span class="nav-link">{{ $user->name }}</span>
-                                </li>
-                            </ul>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center justify-content-center"
+                                    href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="avatar me-3 mt-n1">
+                                        @if ($mahasiswa->foto_profile)
+                                            <img src="{{ Storage::url('fotos/' . $mahasiswa->foto_profile) }}"
+                                                alt="Foto Profil"
+                                                style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;"
+                                                class="rounded-circle"
+                                                onerror="this.src='{{ asset('app-assets/img/avatars/1.png') }}'">
+                                        @else
+                                            <img src="{{ asset('images/default-profile.png') }}" alt="Foto Default"
+                                                style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;"
+                                                class="rounded-circle">
+                                        @endif
+                                    </div>
+                                    <span
+                                        class="fw-medium text-dark d-block text-center">{{ Auth::user()->name }}</span>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="ti ti-user me-2"></i>
+                                            Profil</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="ti ti-logout me-2"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                     </div>
+
 
                 </div>
             </nav>
