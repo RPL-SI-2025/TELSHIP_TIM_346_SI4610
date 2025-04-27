@@ -25,14 +25,14 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/admin/pengguna', [AdminController::class, 'index'])->name('admin.dashboard');
-//     Route::put('/admin/mahasiswa/update/{id}', [AdminController::class, 'updateMahasiswa'])->name('admin.mahasiswa.update');
-//     Route::delete('/admin/mahasiswa/delete/{id}', [AdminController::class, 'deleteMahasiswa'])->name('admin.mahasiswa.delete');
-//     Route::get('/admin/mentor', [AdminController::class, 'index_mentor'])->name('admin.mentor');
-//     Route::put('/admin/mentor/update/{id}', [AdminController::class, 'updateMentor'])->name('admin.mentor.update');
-//     Route::delete('/admin/mentor/delete/{id}', [AdminController::class, 'deleteMentor'])->name('admin.mentor.delete');
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/pengguna', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::put('/admin/mahasiswa/update/{id}', [AdminController::class, 'updateMahasiswa'])->name('admin.mahasiswa.update');
+    Route::delete('/admin/mahasiswa/delete/{id}', [AdminController::class, 'deleteMahasiswa'])->name('admin.mahasiswa.delete');
+    Route::get('/admin/mentor', [AdminController::class, 'index_mentor'])->name('admin.mentor');
+    Route::put('/admin/mentor/update/{id}', [AdminController::class, 'updateMentor'])->name('admin.mentor.update');
+    Route::delete('/admin/mentor/delete/{id}', [AdminController::class, 'deleteMentor'])->name('admin.mentor.delete');
+});
 
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
