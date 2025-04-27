@@ -29,6 +29,6 @@ class MonitoringMahasiswaController extends Controller
             ],
         ];
 
-        return view('admin.monitoring.monitoring-mahasiswa', compact('dataMahasiswa'));
+        return view('admin.monitoring.monitoring-mahasiswa', ['activePage' => 'monitoring'], compact('dataMahasiswa'));
     }
 }

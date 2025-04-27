@@ -12,6 +12,7 @@ use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\AdminLowonganController;
+use App\Http\Controllers\MonitoringMahasiswaController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
 
