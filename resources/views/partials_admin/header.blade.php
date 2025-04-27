@@ -347,7 +347,6 @@
                                             class="rounded-circle">
                                     @endif --}}
                                 </div>
-                                <span class="fw-medium text-dark">{{ Auth::user()->name }}</span>
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end" style="position: absolute;"
