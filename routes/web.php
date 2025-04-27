@@ -16,7 +16,7 @@ use App\Http\Controllers\MonitoringMahasiswaController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\MonitoringMahasiswaController;
+
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -83,4 +83,3 @@ Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowonga
 Route::post('lowongan/{id}/approve', [AdminLowonganController::class, 'approve'])->name('lowongan.approve');
 Route::post('lowongan/{id}/reject', [AdminLowonganController::class, 'reject'])->name('lowongan.reject');
 Route::get('monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');
-
