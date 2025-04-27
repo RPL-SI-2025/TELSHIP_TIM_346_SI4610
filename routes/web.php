@@ -11,11 +11,14 @@ use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\AdminLowonganController;
+use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\SeleksiController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
@@ -53,9 +56,15 @@ Route::get('/mahasiswa/status', [LaporanController::class, 'index_status'])->nam
 Route::post('/laporan', [LaporanController::class, 'store_laporan'])->name('laporan.store');
 Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store');
 
-Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
-Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
-Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
+// Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
+// Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
+// Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
+//route seleski pelamar
+Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
+Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
+Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
+Route::get('/pelamar/{id}/profil', [PelamarController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
+Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -64,4 +73,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mentor/lowongan', [MentorController::class, 'showLowongan'])->name('mentor.lowongan');
     Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
 });
- 
+
+Route::get('/admin/id-perusahaan/create', [CompanyController::class, 'create'])->name('company.create');
+Route::post('/admin/id-perusahaan', [CompanyController::class, 'store'])->name('company.store');
+Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowongan.index');
+Route::post('lowongan/{id}/approve', [AdminLowonganController::class, 'approve'])->name('lowongan.approve');
+Route::post('lowongan/{id}/reject', [AdminLowonganController::class, 'reject'])->name('lowongan.reject');
+Route::get('monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');

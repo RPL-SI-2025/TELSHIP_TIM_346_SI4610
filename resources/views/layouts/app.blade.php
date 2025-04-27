@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telship</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    @include('partials.navbar')
-    <div class="d-flex">
-        @include('partials.sidebar')
-        <main class="flex-grow-1 p-4">
-            @yield('content')
-        </main>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <a class="navbar-brand" href="#">Telship</a>
+    </nav>
+
+    <main class="py-4">
+        @yield('content')
+    </main>
 </body>
 </html>
