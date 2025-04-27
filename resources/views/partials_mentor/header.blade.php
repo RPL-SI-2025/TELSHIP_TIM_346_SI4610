@@ -76,11 +76,56 @@
 
     @yield('page_style')
     <style>
-        .dropdown-menu {
-            z-index: 9999;
-            min-width: 10rem;
+        /* Solusi CSS untuk dropdown tanpa JavaScript tambahan */
+        /* Menambahkan toggle untuk dropdown */
+        .nav-item.dropdown {
+            position: relative !important;
         }
 
+        .nav-link.dropdown-toggle {
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* Menggunakan trick checkbox untuk toggle */
+        .nav-item.dropdown input[type="checkbox"] {
+            display: none;
+        }
+
+        .nav-item.dropdown label {
+            cursor: pointer;
+            display: block;
+        }
+
+        /* Dropdown akan muncul saat checkbox dicentang */
+        .nav-item.dropdown input[type="checkbox"]:checked~.dropdown-menu {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        .dropdown-menu {
+            position: absolute !important;
+            right: 0 !important;
+            top: 100% !important;
+            z-index: 9999 !important;
+            margin-top: 0.5rem !important;
+            transition: all 0.2s ease-in-out;
+            display: none !important;
+        }
+
+        /* Close dropdown when clicking outside */
+        body:has(.nav-item.dropdown input[type="checkbox"]:checked) .close-dropdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9998;
+            background: transparent;
+        }
 
         .bg-menu-theme.menu-vertical .menu-item.active>.menu-link:not(.menu-toggle) {
             background: #4EA971 !important;
@@ -333,34 +378,24 @@
 
                         <!-- User -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <div class="avatar me-3 mt-n1">
-                                    {{-- @if ($mahasiswa->foto_profile)
-                                        <img src="{{ Storage::url('fotos/' . $mahasiswa->foto_profile) }}"
-                                            alt="Foto Profil" style="width: 50px; height: 50px; object-fit: cover;"
-                                            class="rounded-circle"
-                                            onerror="this.src='{{ asset('app-assets/img/avatars/1.png') }}'">
-                                    @else
-                                        <img src="{{ asset('images/default-profile.png') }}" alt="Foto Default"
-                                            style="width: 50px; height: 50px; object-fit: cover;"
-                                            class="rounded-circle">
-                                    @endif --}}
+                            <input type="checkbox" id="dropdown-toggle" class="dropdown-checkbox">
+                            <label for="dropdown-toggle" class="nav-link dropdown-toggle d-flex align-items-center">
+                                <div class="avatar me-2">
+                                    <img src="{{ asset('app-assets/img/avatars/1.png') }}" alt="Foto Default"
+                                        style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle">
                                 </div>
-                                <span class="fw-medium text-dark">{{ Auth::user()->name }}</span>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-end" style="position: absolute;"
-                                data-bs-popper="static">
-                                <li><a class="dropdown-item" href="{{ route('mahasiswa.index') }}"><i
-                                            class="ti ti-user me-2"></i>Profil</a></li>
+                                <span class="fw-medium">{{ Auth::user()->name }}</span>
+                            </label>
+                            <div class="close-dropdown-overlay"
+                                onclick="document.getElementById('dropdown-toggle').checked = false;"></div>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="#"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="ti ti-logout me-2"></i>Logout
+                                        <i class="ti ti-logout me-2"></i> Logout
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">

@@ -13,6 +13,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\AdminLowonganController;
 use App\Http\Controllers\MonitoringMahasiswaController;
+use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\SeleksiController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -55,10 +57,10 @@ Route::get('/mahasiswa/status', [LaporanController::class, 'index_status'])->nam
 Route::post('/laporan', [LaporanController::class, 'store_laporan'])->name('laporan.store');
 Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store');
 
-// Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
-// Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
-// Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
-//route seleski pelamar
+Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
+Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
+Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
+// route seleski pelamar
 Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
 Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
 Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
