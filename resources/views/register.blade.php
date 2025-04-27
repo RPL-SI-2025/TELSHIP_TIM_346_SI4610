@@ -87,7 +87,7 @@
                         <input type="text" class="form-control" id="no_hp" name="no_hp" required />
                     </div>
                     <button type="submit" class="btn btn-danger w-100 mb-3">Daftar</button>
-                    <a href="/registermentor" class="btn btn-outline-danger w-100">Daftar Sebagai Mentor</a>
+                    {{-- <a href="/registermentor" class="btn btn-outline-danger w-100">Daftar Sebagai Mentor</a> --}}
                     <p class="mt-3">Sudah punya akun? <a href="/login" class="text-danger">Masuk</a></p>
                 </form>
             </div>
