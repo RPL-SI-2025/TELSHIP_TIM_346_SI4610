@@ -146,4 +146,37 @@
         </div>
     </div>
 
+    <!-- Modal Berhasil -->
+    <div class="modal fade" id="modalBerhasil" tabindex="-1" aria-labelledby="modalBerhasilLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-body text-center p-5">
+                    <img src="{{ asset('assets/images/OBJECTS.svg') }}" alt="Sukses"
+                        style="width: 200px; max-width: 100%; margin-bottom: 20px;">
+ 
+                    <h4 class="fw-bold mb-3">Lowongan Sedang Ditinjau</h4>
+ 
+                    <p class="text-secondary mb-4">
+                        Lowongan magang sedang ditinjau oleh admin untuk disetujui
+                    </p>
+ 
+                    <button type="button" class="btn w-100 py-3 rounded-pill fw-bold"
+                        style="background-color: #EC1D24; color: white;" data-bs-dismiss="modal">
+                        Kembali
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script>
+        // Cek jika ada pesan sukses dari controller
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                var modalBerhasil = new bootstrap.Modal(document.getElementById('modalBerhasil'));
+                modalBerhasil.show();
+            @endif
+        });
+    </script>    
+
 @endsection

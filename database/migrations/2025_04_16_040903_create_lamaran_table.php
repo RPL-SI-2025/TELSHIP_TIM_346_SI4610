@@ -1,9 +1,9 @@
 <?php
-
+ 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+ 
 return new class extends Migration
 {
     /**
@@ -18,13 +18,13 @@ return new class extends Migration
             $table->date('tanggal_lamaran');
             $table->enum('status', ['lolos', 'ditolak', 'diproses']);
             $table->timestamps();
-
+ 
             $table->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswa')->onDelete('cascade');
             $table->foreign('id_lowongan')->references('id_lowongan')->on('lowongan')->onDelete('cascade');
     });
 }
-
-
+ 
+ 
     /**
      * Reverse the migrations.
      */
