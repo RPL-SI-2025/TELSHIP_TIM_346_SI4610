@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login'); // pastikan file login.blade.php ada di resources/views
+        return view('login');
     }
 
     public function login(Request $request)
@@ -18,9 +18,32 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard'); // ganti sesuai rute dashboard kamu
+
+            $role = Auth::user()->role;
+
+            switch ($role) {
+                case 'mahasiswa':
+                    return redirect()->intended('/mahasiswa/profile');
+                case 'mentor':
+                    return redirect()->intended('/mentor/dashboard');
+                case 'admin':
+                    return redirect()->intended('/admin/pengguna');
+                default:
+                    Auth::logout();
+                    return back()->with('error', 'Role tidak dikenali.');
+            }
         }
 
         return back()->with('error', 'Email atau password salah.');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
