@@ -32,9 +32,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/mentor', [AdminController::class, 'index_mentor'])->name('admin.mentor');
     Route::put('/admin/mentor/update/{id}', [AdminController::class, 'updateMentor'])->name('admin.mentor.update');
     Route::delete('/admin/mentor/delete/{id}', [AdminController::class, 'deleteMentor'])->name('admin.mentor.delete');
+    Route::post('admin/mentor/store', [AdminController::class, 'storeMentor'])->name('admin.mentor.store');
     Route::get('/admin/mitra', [AdminController::class, 'index_mitra'])->name('admin.mitra');
     Route::put('/admin/mitra/update/{id}', [AdminController::class, 'updateMitra'])->name('admin.mitra.update');
     Route::delete('/admin/mitra/delete/{id}', [AdminController::class, 'deleteMitra'])->name('admin.mitra.delete');
+    Route::post('admin/mitra/store', [AdminController::class, 'storeMitra'])->name('admin.mitra.store');
 });
 
 
