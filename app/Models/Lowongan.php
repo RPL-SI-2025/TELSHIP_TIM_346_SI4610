@@ -20,6 +20,7 @@ class Lowongan extends Model
         'persyaratan',
         'id_mentor',
         'status',
+        'dibuka_sampai'
     ];
 
     public function userMentor()
