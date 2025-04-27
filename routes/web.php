@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/mentor', [AdminController::class, 'index_mentor'])->name('admin.mentor');
     Route::put('/admin/mentor/update/{id}', [AdminController::class, 'updateMentor'])->name('admin.mentor.update');
     Route::delete('/admin/mentor/delete/{id}', [AdminController::class, 'deleteMentor'])->name('admin.mentor.delete');
+    Route::get('/admin/mitra', [AdminController::class, 'index_mitra'])->name('admin.mitra');
+    Route::put('/admin/mitra/update/{id}', [AdminController::class, 'updateMitra'])->name('admin.mitra.update');
+    Route::delete('/admin/mitra/delete/{id}', [AdminController::class, 'deleteMitra'])->name('admin.mitra.delete');
 });
 
 
