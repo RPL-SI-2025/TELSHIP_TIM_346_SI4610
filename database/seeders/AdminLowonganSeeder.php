@@ -6,24 +6,24 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class JobSeeder extends Seeder
+class AdminLowonganSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('jobs')->insert([
+        DB::table('admin_lowongan')->insert([
             'title' => 'Front-End Developer',
             'company' => 'Open Library Telkom University',
-            'logo' => 'logo.png', // jika kamu pakai logo
+            'logo' => 'img7.png',
             'status' => 'pending'
         ]);
 
-        DB::table('jobs')->insert([
-            'title' => 'Front-End Developer',
-            'company' => 'Open Library Telkom University',
-            'logo' => 'logo.png',
+        DB::table('admin_lowongan')->insert([
+            'title' => 'Back-End Developer',
+            'company' => 'Telkom Indonesia',
+            'logo' => 'img7.png',
             'status' => 'pending'
         ]);
     }
