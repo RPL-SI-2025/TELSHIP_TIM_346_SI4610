@@ -82,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
 });
 
+
 Route::get('/admin/id-perusahaan/create', [CompanyController::class, 'create'])->name('company.create');
 Route::post('/admin/id-perusahaan', [CompanyController::class, 'store'])->name('company.store');
 Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowongan.index');
