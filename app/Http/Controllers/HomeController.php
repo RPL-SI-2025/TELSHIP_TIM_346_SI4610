@@ -20,10 +20,15 @@ class HomeController extends Controller
         $lowongans = Lowongan::with(['userMentor.mitra'])->where('status', 'disetujui')->get();
         
         $user = Auth::user();
- 
-        // $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
 
+        if ($user) {
+            // Hanya ambil data mahasiswa jika sudah login
+            $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
+        } else {
+            $mahasiswa = null; // Jika belum login, set $mahasiswa menjadi null
+        }
 
-        return view('landingpage.landingpage', compact('lowongans'));
+        return view('landingpage.landingpage', compact('lowongans', 'mahasiswa'));
     }
+
 }
