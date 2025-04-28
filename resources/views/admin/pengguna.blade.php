@@ -114,11 +114,11 @@
                                                 data-bs-target="#editModal">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button type="button" class="action-btn delete-btn"
+                                            <!-- <button type="button" class="action-btn delete-btn"
                                                 data-id="{{ $mhs->id }}" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal">
                                                 <i class="fas fa-trash"></i>
-                                            </button>
+                                            </button> -->
                                         </div>
                                     </td>
                                 </tr>

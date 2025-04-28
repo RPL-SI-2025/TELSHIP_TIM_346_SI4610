@@ -366,7 +366,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center justify-content-center"
                                     href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar me-3 mt-n1">
-                                        @if ($mahasiswa->foto_profile)
+                                        @if (Auth::check() && $mahasiswa && $mahasiswa->foto_profile)
                                             <img src="{{ Storage::url('fotos/' . $mahasiswa->foto_profile) }}"
                                                 alt="Foto Profil"
                                                 style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;"
