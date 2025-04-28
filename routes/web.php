@@ -81,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
 });
 
+
 Route::get('/admin/id-perusahaan/create', [CompanyController::class, 'create'])->name('company.create');
 Route::post('/admin/id-perusahaan', [CompanyController::class, 'store'])->name('company.store');
 Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowongan.index');
