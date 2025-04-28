@@ -29,6 +29,7 @@
                                      @if (!empty($lowongan->userMentor->mitra->logo_perusahaan))
                                          <img src="{{ asset('storage/' . $lowongan->userMentor->mitra->logo_perusahaan) }}"
                                              alt="Logo Perusahaan" class="w-100 h-100 object-fit-cover">
+                                             onerror="this.onerror=null; this.src='{{ asset('images/Logo Oplib.png') }}';">
                                      @else
                                          <img src="{{ asset('images/Logo Oplib.png') }}" alt="Default Logo"
                                              class="w-100 h-100 object-fit-cover">
