@@ -68,11 +68,7 @@ Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])
 Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
 Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
 // route seleski pelamar
-Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
-Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
-Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
-Route::get('/pelamar/{id}/profil', [PelamarController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
-Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
+
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -80,7 +76,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/mentor/lowongan/store', [MentorController::class, 'storeLowongan'])->name('mentor.lowongan.store');
     Route::get('/mentor/lowongan', [MentorController::class, 'showLowongan'])->name('mentor.lowongan');
     Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
+    Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
+    Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
+    Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
+    Route::get('/pelamar/{id}/profil', [PelamarController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
+    Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
 });
+
 
 Route::get('/admin/id-perusahaan/create', [CompanyController::class, 'create'])->name('company.create');
 Route::post('/admin/id-perusahaan', [CompanyController::class, 'store'])->name('company.store');

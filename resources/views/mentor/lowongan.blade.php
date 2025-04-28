@@ -21,6 +21,7 @@
 
             <!-- Card Lowongan -->
             @foreach ($lowongans as $lowongan)
+            <a href="{{ url('/seleksi/' . $lowongan->id) }}" style="text-decoration: none; color: inherit;">
                 <div class="card shadow-sm mb-3" style="border-radius: 12px; overflow: hidden;">
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <div class="d-flex align-items-center gap-3">
@@ -71,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+            </a>    
             @endforeach
 
             <!-- Jika tidak ada lowongan -->
