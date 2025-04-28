@@ -21,9 +21,9 @@ class HomeController extends Controller
         
         $user = Auth::user();
  
-        $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
+        // $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
 
 
-        return view('landingpage.landingpage', compact('lowongans', 'mahasiswa'));
+        return view('landingpage.landingpage', compact('lowongans'));
     }
 }
