@@ -41,8 +41,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-danger w-100 mb-3">Masuk</button>
-                <a href="/register" class="btn btn-outline-danger w-100 mb-2">Daftar Sebagai Mahasiswa</a>
-                <a href="/registermentor" class="btn btn-outline-danger w-100">Daftar Sebagai Mentor</a>
+                <a href="/register" class="btn btn-outline-danger w-100 mb-2">Daftar</a>
+                {{-- <a href="/registermentor" class="btn btn-outline-danger w-100">Daftar Sebagai Mentor</a> --}}
             </form>
         </div>
     </div>

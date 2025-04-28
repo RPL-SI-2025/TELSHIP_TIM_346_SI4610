@@ -99,7 +99,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Curriculum Vitae (Wajib) <span class="text-danger">*</span></label>
-                            <input type="url" name="cv" value="{{ old('cv', $mahasiswa->cv) }}"
+                            <input type="url" name="cv" value="{{ old('cv', $dokumen->link_cv ?? '') }}"
                                 class="form-control @error('cv') is-invalid @enderror" placeholder="Link CV">
                             @error('cv')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -108,7 +108,8 @@
 
                         <div class="mb-3">
                             <label class="form-label">Transkrip Nilai (Wajib) <span class="text-danger">*</span></label>
-                            <input type="url" name="transkrip" value="{{ old('transkrip', $mahasiswa->transkrip) }}"
+                            <input type="url" name="transkrip"
+                                value="{{ old('transkrip', $dokumen->link_transkrip ?? '') }}"
                                 class="form-control @error('transkrip') is-invalid @enderror" placeholder="Link Transkrip">
                             @error('transkrip')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -117,7 +118,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">KTP (Wajib) <span class="text-danger">*</span></label>
-                            <input type="url" name="ktp" value="{{ old('ktp', $mahasiswa->ktp) }}"
+                            <input type="url" name="ktp" value="{{ old('ktp', $dokumen->link_ktp ?? '') }}"
                                 class="form-control @error('ktp') is-invalid @enderror" placeholder="Link KTP">
                             @error('ktp')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -127,7 +128,7 @@
                         <div class="mb-3">
                             <label class="form-label">Sertifikat Pengalaman Organisasi (Opsional)</label>
                             <input type="url" name="sertifikat"
-                                value="{{ old('sertifikat', $mahasiswa->sertifikat) }}"
+                                value="{{ old('sertifikat', $dokumen->link_sertifikat ?? '') }}"
                                 class="form-control @error('sertifikat') is-invalid @enderror"
                                 placeholder="Link Sertifikat">
                             @error('sertifikat')
@@ -138,7 +139,7 @@
                         <div class="mb-4">
                             <label class="form-label">Dokumen Tambahan (Jika Perlu)</label>
                             <input type="url" name="dokumen_tambahan"
-                                value="{{ old('dokumen_tambahan', $mahasiswa->dokumen_tambahan) }}"
+                                value="{{ old('dokumen_tambahan', $dokumen->link_dokumen_tambahan ?? '') }}"
                                 class="form-control @error('dokumen_tambahan') is-invalid @enderror"
                                 placeholder="Link Tambahan">
                             @error('dokumen_tambahan')
