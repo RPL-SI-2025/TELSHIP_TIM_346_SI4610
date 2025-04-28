@@ -10,10 +10,10 @@
 
     <ul class="nav flex-column" style="list-style: none; padding-left: 0;">
         <li class="nav-item mb-2">
-            @if ($activePage == 'lowongan')
-                <a href="/mentor/lowongan" class="nav-link text-decoration-none"
+            @if (Request::is('mentor/lowongan', 'mentor/lowongan/*'))
+                <a href="/mentor/laporan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
-                    <span style="color: #6c757d; font-weight: 600;">
+                    <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/lowongan-icon.svg') }}" alt="Lowongan" width="18"
                             style="margin-right: 8px;">
                         LOWONGAN
