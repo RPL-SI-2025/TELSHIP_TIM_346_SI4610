@@ -1,17 +1,18 @@
-@extends('partials_mahasiswa_login.template')
+@extends('partials_mentor.template')
  
 @section('main')
     {{-- ganti dari 'content' ke 'main' --}}
     <div class="d-flex" style="min-height: 100vh">
  
         {{-- Sidebar --}}
-        @include('partials_mahasiswa_login.sidebar_mahasiswa')
+        @include('partials_mentor.sidebar_mentor')
 
     <div style="flex: 1; background-color: #fff5f5; margin-top: 80px;">
         <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 1rem 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(255,0,0,0.05); border: 1px solid #fff5f5;">
             <!-- Pelamar Info -->
             <div style="display: flex; align-items: center;">
-                <img src="/foto-profil.png" alt="Foto" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
+                <img src="/app-assets/img/avatars/1.png" alt="Foto" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem;">
+                
                 <div>
                     <strong style="color: #b30000;">Muhammad Naufal</strong><br>
                     <span style="font-size: 14px; color: #a94442;">SI Sistem Informasi</span>
