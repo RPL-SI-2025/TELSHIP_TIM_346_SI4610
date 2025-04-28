@@ -67,7 +67,7 @@
                 </div>
 
                 <!-- Add Mitra Button di Pojok Kanan -->
-                <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add Mitra</button>
+                <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Tambahkan Mitra</button>
             </div>
             <!-- Success or Error Messages -->
             @if (session('success'))

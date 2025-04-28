@@ -68,7 +68,7 @@
                 </div>
 
                 <!-- Add Mentor Button di Pojok Kanan -->
-                <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Add Mentor</button>
+                <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Tambahkan Mentor</button>
             </div>
 
             <!-- Success or Error Messages -->
