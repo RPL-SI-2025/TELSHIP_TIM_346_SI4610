@@ -34,7 +34,7 @@
 
     <div class="d-flex gap-2 mb-3">
         <a href="{{ route('monitoring.mahasiswa') }}" class="btn btn-outline-danger fw-bold">MAHASISWA</a>
-        <a href="#" class="btn btn-light border fw-bold text-muted">LOWONGAN</a>
+        <a href="{{ route('monitoring.lowongan') }}" class="btn btn-light border fw-bold text-muted">LOWONGAN</a>
     </div>
 
     <div class="table-responsive">

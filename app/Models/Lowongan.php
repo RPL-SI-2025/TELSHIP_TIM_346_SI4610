@@ -28,4 +28,8 @@ class Lowongan extends Model
         return $this->belongsTo(UserMentor::class, 'id_mentor', 'id_mentor');
     }
     
+    public function userAdmin()
+    {
+        return $this->belongsTo(UserAdmin::class, 'id_admin', 'id_admin');
+    }
 }
