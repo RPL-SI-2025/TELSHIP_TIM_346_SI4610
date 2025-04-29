@@ -14,59 +14,60 @@
                          background: linear-gradient(90deg, #EC1D24 0%, #A71318 100%);
                          border: none;
                          border-radius: 8px;">
-                    <i class="bi bi-plus-circle"></i> TAMBAH LOWONGAN
-                </button>
-
-            </div>
-
-            <!-- Card Lowongan -->
-            @foreach ($lowongans as $lowongan)
-                <a href="{{ route('seleksi', ['id' => $lowongan->id]) }}" style="text-decoration: none; color: inherit;">
-                    <div class="card shadow-sm mb-3" style="border-radius: 12px; overflow: hidden;">
-                        <div class="d-flex justify-content-between align-items-center p-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="overflow-hidden" style="width: 45px; height: 45px;">
-                                    @if (!empty($lowongan->userMentor->mitra->logo_perusahaan))
+                     <i class="bi bi-plus-circle"></i> TAMBAH LOWONGAN
+                 </button>
+  
+             </div>
+  
+             <!-- Card Lowongan -->
+             @foreach ($lowongans as $lowongan)
+                 <a href="{{ route('seleksi', ['id' => $lowongan->id]) }}" style="text-decoration: none; color: inherit;">
+                     <div class="card shadow-sm mb-3" style="border-radius: 12px; overflow: hidden;">
+                         <div class="d-flex justify-content-between align-items-center p-3">
+                             <div class="d-flex align-items-center gap-3">
+                                 <div class="overflow-hidden" style="width: 45px; height: 45px;">
+                                     @if (!empty($lowongan->userMentor->mitra->logo_perusahaan))
                                         <img src="{{ asset('storage/' . $lowongan->userMentor->mitra->logo_perusahaan) }}"
                                             alt="Logo Perusahaan" class="w-100 h-100 object-fit-cover"
                                             onerror="this.onerror=null; this.src='{{ asset('images/Logo Oplib.png') }}';">
                                     @else
-                                        <img src="{{ asset('app-assets/img/ICON.svg') }}" alt="Default Logo"
+                                        <img src="{{ asset('images/Logo Oplib.png') }}" alt="Default Logo"
                                             class="w-100 h-100 object-fit-cover"
                                             onerror="this.onerror=null; this.src='{{ asset('images/Logo Oplib.png') }}';">
                                     @endif
-                                </div>
-                                <div>
-                                    <div class="fw-bold fs-5">{{ $lowongan->nama_posisi }}</div>
-                                    <div class="text-muted">
-                                        {{ $lowongan->userMentor->mitra->nama_perusahaan ?? 'Perusahaan tidak ditemukan' }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="d-flex align-items-center gap-3">
-                                @php
-                                    $tanggalSekarang = \Carbon\Carbon::now();
-                                    $tanggalDibukaSampai = \Carbon\Carbon::parse($lowongan->dibuka_sampai);
-                                    $selisihHari = $tanggalSekarang->diffInDays($tanggalDibukaSampai, false);
-
-                                    $badgeStyles = [
-                                        'disetujui' => ['bg' => '#e9fce9', 'color' => '#28a745', 'text' => 'Aktif'],
-                                        'diproses' => ['bg' => '#e9f2ff', 'color' => '#007bff', 'text' => 'Diproses'],
-                                        'ditolak' => ['bg' => '#ffe9e9', 'color' => '#dc3545', 'text' => 'Ditolak'],
-                                        'menunggu' => ['bg' => '#e9f2ff', 'color' => '#007bff', 'text' => 'Menunggu'],
-                                    ];
-                                    $status = $lowongan->status;
-                                @endphp
-
-                                @if ($selisihHari > 0)
-                                    <div class="text-muted">{{ intval($selisihHari) }} Hari Tersisa</div>
-                                @else
-                                    <div class="text-muted">Lowongan Ditutup</div>
-                                @endif
-
-                                <span class="badge rounded-pill text-center px-3 py-2"
-                                    style="background-color: {{ $badgeStyles[$status]['bg'] }}; 
+ 
+                                 </div>
+                                 <div>
+                                     <div class="fw-bold fs-5">{{ $lowongan->nama_posisi }}</div>
+                                     <div class="text-muted">
+                                         {{ $lowongan->userMentor->mitra->nama_perusahaan ?? 'Perusahaan tidak ditemukan' }}
+                                     </div>
+                                 </div>
+                             </div>
+  
+                             <div class="d-flex align-items-center gap-3">
+                                 @php
+                                     $tanggalSekarang = \Carbon\Carbon::now();
+                                     $tanggalDibukaSampai = \Carbon\Carbon::parse($lowongan->dibuka_sampai);
+                                     $selisihHari = $tanggalSekarang->diffInDays($tanggalDibukaSampai, false);
+  
+                                     $badgeStyles = [
+                                         'disetujui' => ['bg' => '#e9fce9', 'color' => '#28a745', 'text' => 'Aktif'],
+                                         'diproses' => ['bg' => '#e9f2ff', 'color' => '#007bff', 'text' => 'Diproses'],
+                                         'ditolak' => ['bg' => '#ffe9e9', 'color' => '#dc3545', 'text' => 'Ditolak'],
+                                         'menunggu' => ['bg' => '#e9f2ff', 'color' => '#007bff', 'text' => 'Menunggu'],
+                                     ];
+                                     $status = $lowongan->status;
+                                 @endphp
+  
+                                 @if ($selisihHari > 0)
+                                     <div class="text-muted">{{ intval($selisihHari) }} Hari Tersisa</div>
+                                 @else
+                                     <div class="text-muted">Lowongan Ditutup</div>
+                                 @endif
+  
+                                 <span class="badge rounded-pill text-center px-3 py-2"
+                                     style="background-color: {{ $badgeStyles[$status]['bg'] }}; 
                                  color: {{ $badgeStyles[$status]['color'] }}; 
                                  min-width: 80px; display: inline-block;">
                                     {{ $badgeStyles[$status]['text'] }}
