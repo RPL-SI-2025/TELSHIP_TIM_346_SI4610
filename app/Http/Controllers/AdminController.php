@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
@@ -111,30 +114,95 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
     }
+    
+    public function storeMentor(Request $request)
+    {
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|unique:user_mentor,email',
+            'password' => 'required|string|min:6',
+            'id_perusahaan' => 'required|integer',
+        ]);
+    
+        try {
+            $user = new User();
+            $user->name = $request->nama_lengkap;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->remember_token = Str::random(60);
+            $user->id_perusahaan = $request->id_perusahaan;
+            $user->role = 'mentor';
+            $user->save();
+    
+            // Save to the user_mentor table, including the hashed password
+            $mentor = new UserMentor();
+            $mentor->nama_lengkap = $request->nama_lengkap;
+            $mentor->email = $request->email;
+            $mentor->password = $user->password; // Use the same hashed password
+            $mentor->id_perusahaan = $request->id_perusahaan;
+            $mentor->user_id = $user->id;
+            $mentor->save();
+    
+            return response()->json(['message' => 'Data Mentor berhasil ditambahkan.']);
+        } catch (\Exception $e) {
+            return response()->json([
+                'errors' => ['message' => 'Gagal menambahkan data: ' . $e->getMessage()]
+            ], 422);
+        }
+    }
 
     public function updateMentor(Request $request, $id)
     {
+        // Validasi input, sesuai dengan storeMentor
         $request->validate([
-            'nama_lengkap' => 'required',
-            'email' => 'required|email',
-            'id_perusahaan' => 'required',
-            'user_id' => 'required',
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                \Illuminate\Validation\Rule::unique('users')->ignore($id, 'id'),
+                \Illuminate\Validation\Rule::unique('user_mentor')->ignore($id, 'user_id'),
+            ],
+            'id_perusahaan' => 'required|integer',
         ]);
-
+    
         try {
-            $mentor = UserMentor::find($id);
+            // Log data yang diterima dari request
+            \Log::info('Request data for updateMentor: ', $request->all());
+    
+            // Cari data di UserMentor berdasarkan user_id
+            $mentor = UserMentor::where('user_id', $id)->first();
             if (!$mentor) {
+                \Log::error('Mentor not found for user_id: ' . $id);
                 return redirect()->back()->with('error', 'Data mentor tidak ditemukan.');
             }
-
+    
+            // Log data sebelum update
+            \Log::info('Mentor data before update: ', $mentor->toArray());
+    
+            // Update data di UserMentor
             $mentor->nama_lengkap = $request->nama_lengkap;
             $mentor->email = $request->email;
             $mentor->id_perusahaan = $request->id_perusahaan;
-            $mentor->user_id = $request->user_id;
             $mentor->save();
-
+    
+            // Log data setelah update
+            \Log::info('Mentor data after update: ', $mentor->toArray());
+    
+            // Update data di tabel users
+            $user = User::find($id);
+            if ($user) {
+                $user->name = $request->nama_lengkap;
+                $user->email = $request->email;
+                $user->id_perusahaan = $request->id_perusahaan;
+                $user->save();
+                \Log::info('User data after update: ', $user->toArray());
+            } else {
+                \Log::warning('User not found for id: ' . $id);
+            }
+    
             return redirect()->back()->with('success', 'Data mentor berhasil diperbarui.');
         } catch (\Exception $e) {
+            \Log::error('Error saat update mentor: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
         }
     }
