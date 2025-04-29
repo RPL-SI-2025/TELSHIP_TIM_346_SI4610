@@ -32,5 +32,9 @@
      {
          return $this->hasMany(Lamaran::class, 'id_lowongan');
      }
-  
+     
+     public function userAdmin()
+    {
+        return $this->belongsTo(UserAdmin::class, 'id_admin', 'id_admin');
+    }
  }

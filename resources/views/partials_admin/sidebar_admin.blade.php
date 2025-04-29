@@ -53,7 +53,7 @@
             @endif
         </li>
         <li class="nav-item mb-2">
-            @if (Request::is('monitoring/mahasiswa'))
+            @if (Request::is('monitoring/mahasiswa', 'monitoring/lowongan'))
                 <!-- Versi dengan border merah dan teks merah untuk menu aktif -->
                 <a href="/monitoring/mahasiswa" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
