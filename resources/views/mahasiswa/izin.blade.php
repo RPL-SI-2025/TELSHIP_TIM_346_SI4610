@@ -25,7 +25,7 @@
                 <div class="card-body">Kirim Izin Ke Mentor</h5>
                     <p class="text-muted">Tuliskan mengapa kamu izin hari ini</p>
 
-                    <form action="{{ route('izin.store') }}" method="POST">
+                    <form id="IzinForm" action="{{ route('izin.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="tanggal" class="form-label fw-semibold">Tanggal</label>
@@ -49,4 +49,22 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('IzinForm').addEventListener('submit', function(e) {
+            const tanggal = document.getElementById('tanggal').value.trim();
+            const deskripsi = document.getElementById('deskripsi').value.trim();
+
+            if (tanggal === '' || deskripsi === '') {
+                e.preventDefault(); // stop form submit
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops!',
+                    text: 'Tanggal dan Deskripsi tidak boleh kosong!',
+                    confirmButtonColor: '#EC1D24'
+                });
+            }
+        });
+    </script>
 @endsection
