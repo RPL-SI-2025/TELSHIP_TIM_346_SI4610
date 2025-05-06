@@ -13,7 +13,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\AdminLowonganController;
 use App\Http\Controllers\MonitoringMahasiswaController;
-use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MonitoringLowonganController;
@@ -77,10 +76,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mentor/lowongan', [MentorController::class, 'showLowongan'])->name('mentor.lowongan');
     Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
     Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
-    Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
-    Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
-    Route::get('/pelamar/{id}/profil', [PelamarController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
+    Route::post('/pelamar/{id}/terima', [SeleksiController::class, 'terima'])->name('mentor.pelamar.terima');
+    Route::post('/pelamar/{id}/tolak', [SeleksiController::class, 'tolak'])->name('mentor.pelamar.tolak');
+    Route::get('/pelamar/{id}/profil', [SeleksiController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
     Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
+    Route::post('/mentor/laporan/{id}/terima', [MentorController::class, 'terima'])->name('mentor.laporan.terima');
+    Route::post('/mentor/laporan/{id}/tolak', [MentorController::class, 'tolak'])->name('mentor.laporan.tolak');
+    Route::get('/mentor/laporan/{id}/deskripsi', [MentorController::class, 'lihatdeskripsi'])->name('mentor.laporan.deskripsi');
+    Route::get('/mentor/laporan', [MentorController::class, 'index_laporan'])->name('mentor.laporan');
 });
 
 
