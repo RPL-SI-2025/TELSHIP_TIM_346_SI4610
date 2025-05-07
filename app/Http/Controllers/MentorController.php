@@ -92,6 +92,46 @@
    
           return redirect()->back()->with('error', 'Laporan ditolak!');
       }
-  
-  
+
+
+    public function showDetailLowongan($id)
+    {
+        $lowongans = Lowongan::findOrFail($id);
+        $lamaranLolos = Lamaran::where('id_lowongan', $id)
+        ->where('status', 'lolos')
+        ->with([
+            'mahasiswa.user',
+            'mahasiswa.dokumen'
+        ])
+        ->get();
+        $lamarans = Lamaran::with('mahasiswa') // Pastikan relasi mahasiswa ada di model Lamaran
+            ->where('id_lowongan', $id)
+            ->where('status', 'lolos') // Status yang diinginkan
+            ->get();
+
+        return view('mentor.lowongan_detail', compact('lowongans', 'lamarans','lamaranLolos'));
+    }
+
+
+    public function getLolosLamaran($lowonganId)
+    {
+        $lamaranLolos = Lamaran::where('id_lowongan', $lowonganId)
+            ->where('status', 'lolos')
+            ->with('mahasiswa')
+            ->get();
+
+        $data = $lamaranLolos->map(function ($item, $index) {
+            return [
+                'no' => $index + 1,
+                'nama' => $item->mahasiswa->nama_lengkap ?? '-',
+                'tanggal_lamaran' => $item->tanggal_lamaran,
+                'status' => $item->status,
+                'aksi' => '<button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalProfil-' . $item->id_lamaran . '">Lihat Profil</button>',
+            ];
+        });
+
+        return response()->json([
+            'data' => $data
+        ]);
+    }
  }

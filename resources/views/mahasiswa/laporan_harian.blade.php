@@ -20,7 +20,7 @@
                     <h5 class="fw-bold mb-3">Laporan Harian</h5>
                     <p class="text-muted">Tulis Apa Saja Yang Kamu Sudah Kerjakan Hari Ini</p>
 
-                    <form action="{{ route('laporan.store') }}" method="POST">
+                    <form id="laporanForm" action="{{ route('laporan.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="tanggal" class="form-label fw-semibold">Tanggal</label>
@@ -44,4 +44,22 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('laporanForm').addEventListener('submit', function(e) {
+            const tanggal = document.getElementById('tanggal').value.trim();
+            const deskripsi = document.getElementById('deskripsi').value.trim();
+
+            if (tanggal === '' || deskripsi === '') {
+                e.preventDefault(); // stop form submit
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops!',
+                    text: 'Tanggal dan Deskripsi tidak boleh kosong!',
+                    confirmButtonColor: '#EC1D24'
+                });
+            }
+        });
+    </script>
 @endsection

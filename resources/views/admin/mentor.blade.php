@@ -112,14 +112,14 @@
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
-                                            <form action="{{ url('admin/mentor/delete/' . $mnt->id_mentor) }}" method="POST">
+                                            <!-- <form action="{{ url('admin/mentor/delete/' . $mnt->id_mentor) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="action-btn delete-btn"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </form>
+                                            </form> -->
                                         </div>
                                     </td>
                                 </tr>
