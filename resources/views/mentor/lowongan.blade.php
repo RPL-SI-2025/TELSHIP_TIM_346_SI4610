@@ -26,14 +26,15 @@
                          <div class="d-flex justify-content-between align-items-center p-3">
                              <div class="d-flex align-items-center gap-3">
                                  <div class="overflow-hidden" style="width: 45px; height: 45px;">
-                                     @if (!empty($lowongan->userMentor->mitra->logo_perusahaan))
-                                         <img src="{{ asset('storage/' . $lowongan->userMentor->mitra->logo_perusahaan) }}"
-                                             alt="Logo Perusahaan" class="w-100 h-100 object-fit-cover">
-                                             onerror="this.onerror=null; this.src='{{ asset('images/Logo Oplib.png') }}';">
-                                     @else
-                                         <img src="{{ asset('images/Logo Oplib.png') }}" alt="Default Logo"
-                                             class="w-100 h-100 object-fit-cover">
-                                     @endif
+                                    @if (!empty($lowongan->userMentor->mitra->logo_perusahaan))
+                                            <img src="{{ asset('storage/' . $lowongan->userMentor->mitra->logo_perusahaan) }}"
+                                                alt="Logo Perusahaan" class="w-100 h-100 object-fit-cover"
+                                                onerror="this.onerror=null; this.src='{{ asset('images/Logo Oplib.png') }}';">
+                                        @else
+                                            <img src="{{ asset('app-assets/img/ICON.svg') }}" alt="Default Logo"
+                                                class="w-100 h-100 object-fit-cover"
+                                                onerror="this.onerror=null; this.src='{{ asset('images/Logo Oplib.png') }}';">
+                                        @endif
                                  </div>
                                  <div>
                                      <div class="fw-bold fs-5">{{ $lowongan->nama_posisi }}</div>
