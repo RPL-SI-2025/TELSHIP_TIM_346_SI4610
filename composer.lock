@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea873efbf934c4f23298d696825c4ab3",
+    "content-hash": "073c91e8d1527aca4af2c2de47ec22b2",
     "packages": [
         {
             "name": "brick/math",
@@ -6236,16 +6236,16 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v8.3.2",
+            "version": "v8.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "bb701836357bf6f6c6658ef90b5a0f8232affb0f"
+                "reference": "28c9fce3900625522afc2468a9117cdf44f919c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/bb701836357bf6f6c6658ef90b5a0f8232affb0f",
-                "reference": "bb701836357bf6f6c6658ef90b5a0f8232affb0f",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/28c9fce3900625522afc2468a9117cdf44f919c1",
+                "reference": "28c9fce3900625522afc2468a9117cdf44f919c1",
                 "shasum": ""
             },
             "require": {
@@ -6262,13 +6262,11 @@
                 "vlucas/phpdotenv": "^5.2"
             },
             "require-dev": {
-                "laravel/framework": "^10.0|^11.0|^12.0",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench-core": "^8.19|^9.0|^10.0",
+                "orchestra/testbench": "^8.19|^9.0|^10.0",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.1|^11.0|^12.0.1",
-                "psy/psysh": "^0.11.12|^0.12",
-                "symfony/yaml": "^6.2|^7.0"
+                "phpunit/phpunit": "^10.1|^11.0",
+                "psy/psysh": "^0.11.12|^0.12"
             },
             "suggest": {
                 "ext-pcntl": "Used to gracefully terminate Dusk when tests are running."
@@ -6302,11 +6300,7 @@
                 "testing",
                 "webdriver"
             ],
-            "support": {
-                "issues": "https://github.com/laravel/dusk/issues",
-                "source": "https://github.com/laravel/dusk/tree/v8.3.2"
-            },
-            "time": "2025-02-20T14:42:00+00:00"
+            "time": "2025-01-26T19:36:00+00:00"
         },
         {
             "name": "laravel/pail",
@@ -9147,12 +9141,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
