@@ -55,6 +55,24 @@ test('Submit Report with Date 06/07/2025', function () {
     });
 });
 
+test('Submit Report with Empty Fields and See Error Modal', function () {
+    $this->browse(function (Browser $browser) {
+        $browser->clickLink('LAPORAN')
+                ->pause(1000)
+                ->scrollIntoView('button[type="submit"]')
+                ->press('Kirim Laporan')
+                ->pause(1500)
+                ->waitForText('Tanggal dan Deskripsi tidak boleh kosong!', 3)
+                ->assertSee('Tanggal dan Deskripsi tidak boleh kosong!')
+                ->with('.swal2-container', function (Browser $modal) {
+                    $modal->press('OK');
+                })
+                ->pause(1000);
+    });
+});
+
+
+
 test('Logout and Verify', function () {
     $this->browse(function (Browser $browser) {
         // Tes 4: Logout

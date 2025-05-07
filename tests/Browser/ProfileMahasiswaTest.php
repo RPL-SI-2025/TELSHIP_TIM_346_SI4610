@@ -17,6 +17,19 @@ test('login to the application', function () {
     });
 });
 
+test('Error Notif for exception ', function () {
+    $this->browse(function (Browser $browser) {
+        $browser->clear('nama_lengkap')
+            ->pause(500)
+            ->scrollIntoView('button[type="submit"]')
+            ->press('Simpan')
+            ->pause(1000)
+            ->assertSee('The nama lengkap field is required.')
+            ->type('nama_lengkap', 'Samuel Arjuna Queen Bernard')
+            ->pause(500);
+        });
+});
+
 test('fill form correctly after login', function () {
     $this->browse(function (Browser $browser) {
         // Mulai isi form setelah login
