@@ -28,7 +28,7 @@ abstract class DuskTestCase extends BaseTestCase
     protected function driver(): RemoteWebDriver
     {
         $options = (new ChromeOptions)->addArguments(collect([
-            '--start-maximized',
+            $this->shouldStartMaximized() ? '--start-maximized' : '--window-size=1920,1080',
             '--disable-search-engine-choice-screen',
             '--disable-smooth-scrolling',
         ])->unless($this->hasHeadlessDisabled(), function (Collection $items) {
@@ -37,8 +37,7 @@ abstract class DuskTestCase extends BaseTestCase
                 // '--headless=new',
             ]);
         })->all());
-        
-        $options->setBinary('C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe');
+
         return RemoteWebDriver::create(
             $_ENV['DUSK_DRIVER_URL'] ?? env('DUSK_DRIVER_URL') ?? 'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(
