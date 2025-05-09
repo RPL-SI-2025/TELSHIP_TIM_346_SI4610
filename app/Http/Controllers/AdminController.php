@@ -12,6 +12,7 @@ use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Models\UserMentor;
 use App\Models\Mitra;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -21,7 +22,18 @@ class AdminController extends Controller
         $admin = Admin::where('user_id', $user->id)->first();
 
         if ($admin) {
-            $mahasiswa = Mahasiswa::paginate(10);
+            $query = Mahasiswa::query();
+            
+            if (request('search')) {
+                $search = request('search');
+                $query->where(function($q) use ($search) {
+                    $q->where('nim', 'like', "%{$search}%")
+                      ->orWhere('nama_lengkap', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                });
+            }
+
+            $mahasiswa = $query->paginate(10)->withQueryString();
 
             return view('admin.pengguna', [
                 'activePage' => 'pengguna',
@@ -38,8 +50,19 @@ class AdminController extends Controller
         $admin = Admin::where('user_id', $user->id)->first();
     
         if ($admin) {
-            $usermentor = UserMentor::with('user')->paginate(10); // pakai model Mentor dan relasi user
-            $mitra = Mitra::all(); // ambil semua data mitra
+            $query = UserMentor::with('user');
+            
+            if (request('search')) {
+                $search = request('search');
+                $query->where(function($q) use ($search) {
+                    $q->where('id_mentor', 'like', "%{$search}%")
+                      ->orWhere('nama_lengkap', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                });
+            }
+
+            $usermentor = $query->paginate(10)->withQueryString();
+            $mitra = Mitra::all();
     
             return view('admin.mentor', compact('usermentor', 'mitra'));
         }
@@ -53,7 +76,18 @@ class AdminController extends Controller
         $admin = Admin::where('user_id', $user->id)->first();
 
         if ($admin) {
-            $mitra = Mitra::paginate(10);
+            $query = Mitra::query();
+            
+            if (request('search')) {
+                $search = request('search');
+                $query->where(function($q) use ($search) {
+                    $q->where('id_perusahaan', 'like', "%{$search}%")
+                      ->orWhere('nama_perusahaan', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                });
+            }
+
+            $mitra = $query->paginate(10)->withQueryString();
 
             return view('admin.mitra', [
                 'activePage' => 'mitra',
@@ -292,5 +326,17 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             return response()->json(['errors' => ['message' => 'Gagal menambahkan data: ' . $e->getMessage()]], 422);
         }
+    }
+
+    public function exportPDF()
+    {
+        $mahasiswa = Mahasiswa::all();
+        
+        $pdf = PDF::loadView('admin.mahasiswa-pdf', [
+            'mahasiswa' => $mahasiswa,
+            'title' => 'Data Mahasiswa'
+        ]);
+
+        return $pdf->download('data-mahasiswa.pdf');
     }
 }

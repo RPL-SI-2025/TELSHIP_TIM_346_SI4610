@@ -27,6 +27,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pengguna', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/mahasiswa/export-pdf', [AdminController::class, 'exportPDF'])->name('admin.mahasiswa.export-pdf');
     Route::put('/admin/mahasiswa/update/{id}', [AdminController::class, 'updateMahasiswa'])->name('admin.mahasiswa.update');
     Route::delete('/admin/mahasiswa/delete/{id}', [AdminController::class, 'deleteMahasiswa'])->name('admin.mahasiswa.delete');
     Route::get('/admin/mentor', [AdminController::class, 'index_mentor'])->name('admin.mentor');
