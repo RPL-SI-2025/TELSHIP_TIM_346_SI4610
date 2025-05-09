@@ -79,9 +79,25 @@
 
             <!-- Data Table Section -->
             <div class="table-container">
-                {{-- <button class="add-btn mb-3">
-                    <i class="fas fa-plus-circle"></i> Tambah Mahasiswa
-                </button> --}}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        {{-- <button class="add-btn mb-3">
+                            <i class="fas fa-plus-circle"></i> Tambah Mahasiswa
+                        </button> --}}
+                    </div>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('admin.dashboard') }}" method="GET" class="d-flex gap-2">
+                            <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan NIM, nama, atau email..." value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-danger">Cari</button>
+                            @if(request('search'))
+                                <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Reset</a>
+                            @endif
+                        </form>
+                        <a href="{{ route('admin.mahasiswa.export-pdf') }}" class="btn btn-danger">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </a>
+                    </div>
+                </div>
 
                 <div class="table-responsive">
                     <table class="table table-striped border">
