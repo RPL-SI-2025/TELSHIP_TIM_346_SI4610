@@ -67,7 +67,17 @@ Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store
 Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
 Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
 Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
-// route seleski pelamar
+
+Route::get('/mahasiswa/status/lamaran', [MahasiswaController::class, 'index_lamaran'])->name('lamaran.index');
+Route::get('/mahasiswa/kegiatanku', [MahasiswaController::class, 'index_kegiatanku'])->name('mahasiswa.kegiatanku');
+
+Route::post('/mahasiswa/lamaran/{id}/tolak', [LamaranController::class, 'tolak'])->name('lamaran.tolak');
+Route::post('/mahasiswa/lamaran/{id}/terima', [LamaranController::class, 'terima'])->name('lamaran.terima');
+
+
+
+
+
 
 });
 
@@ -80,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pelamar/{id}/terima', [SeleksiController::class, 'terima'])->name('mentor.pelamar.terima');
     Route::post('/pelamar/{id}/tolak', [SeleksiController::class, 'tolak'])->name('mentor.pelamar.tolak');
     Route::get('/pelamar/{id}/profil', [SeleksiController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
-    Route::get('/seleksi/{id_lowongan}', [SeleksiController::class, 'index'])->name('seleksi');
+    Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
     Route::post('/mentor/laporan/{id}/terima', [MentorController::class, 'terima'])->name('mentor.laporan.terima');
     Route::post('/mentor/laporan/{id}/tolak', [MentorController::class, 'tolak'])->name('mentor.laporan.tolak');
     Route::get('/mentor/laporan/{id}/deskripsi', [MentorController::class, 'lihatdeskripsi'])->name('mentor.laporan.deskripsi');

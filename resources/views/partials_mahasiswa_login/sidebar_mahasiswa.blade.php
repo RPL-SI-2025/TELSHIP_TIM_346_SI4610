@@ -54,20 +54,20 @@
         </li>
 
         <li class="nav-item mb-2">
-            @if ($activePage == 'status')
-                <a href="/mahasiswa/status" class="nav-link text-decoration-none"
+            @if (Request::is('mahasiswa/status/lamaran', 'mahasiswa/kegiatanku'))
+                <a href="/mahasiswa/status/lamaran" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
-                        <img src="{{ asset('assets/icons/status-icon.svg') }}" alt="Status" width="18"
+                        <img src="{{ asset('assets/icons/profile-icon.svg') }}" alt="Profile" width="18"
                             style="margin-right: 8px;">
                         STATUS
                     </span>
                 </a>
             @else
-                <a href="/mahasiswa/status" class="nav-link text-decoration-none"
+                <a href="/mahasiswa/status/lamaran" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
-                        <img src="{{ asset('assets/icons/status-icon-no.svg') }}" alt="Status" width="18"
+                        <img src="{{ asset('assets/icons/profile-icon-no.svg') }}" alt="Profile" width="18"
                             style="margin-right: 8px;">
                         STATUS
                     </span>
