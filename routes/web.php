@@ -16,6 +16,7 @@ use App\Http\Controllers\MonitoringMahasiswaController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MonitoringLowonganController;
+use App\Http\Controllers\ExcelController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -38,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/mitra/update/{id}', [AdminController::class, 'updateMitra'])->name('admin.mitra.update');
     Route::delete('/admin/mitra/delete/{id}', [AdminController::class, 'deleteMitra'])->name('admin.mitra.delete');
     Route::post('admin/mitra/store', [AdminController::class, 'storeMitra'])->name('admin.mitra.store');
+    Route::get('/export-excel', [ExcelController::class, 'exportMitraToExcel'])->name('admin.excel.export');
+    Route::post('/import-excel', [ExcelController::class, 'importMitraFromExcel'])->name('admin.excel.import');
+    Route::get('/admin/template/download', [AdminController::class, 'downloadTemplate'])->name('admin.template.download');
+
 });
 
 

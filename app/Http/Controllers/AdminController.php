@@ -339,4 +339,11 @@ class AdminController extends Controller
 
         return $pdf->download('data-mahasiswa.pdf');
     }
+
+    public function downloadTemplate()
+    {
+        $templatePath = public_path('templates/template_mitra.xlsx');
+        return response()->download($templatePath);
+    }
+
 }
