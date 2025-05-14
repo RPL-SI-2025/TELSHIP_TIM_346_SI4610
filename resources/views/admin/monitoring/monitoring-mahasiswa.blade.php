@@ -50,21 +50,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($dataMahasiswa as $mahasiswa)
-                <tr>
-                    <td>{{ $mahasiswa['nim'] }}</td>
-                    <td>{{ $mahasiswa['nama'] }}</td>
-                    <td>{{ $mahasiswa['jurusan'] }}</td>
-                    <td>{{ $mahasiswa['no_hp'] }}</td>
-                    <td>{{ $mahasiswa['perusahaan'] }}</td>
-                    <td>
-                        @if($mahasiswa['status'] == 'Selesai')
-                            <span class="badge bg-success">{{ $mahasiswa['status'] }}</span>
-                        @else
-                            <span class="badge bg-warning text-dark">{{ $mahasiswa['status'] }}</span>
-                        @endif
-                    </td>
-                </tr>
+                {{-- @foreach ($mahasiswas as $mahasiswa)
+                    <tr>
+                        <td>{{ $mahasiswa->nim }}</td>
+                        <td>{{ $mahasiswa->nama }}</td>
+                        <td>{{ $mahasiswa->jurusan }}</td>
+                        <td>{{ $mahasiswa->no_hp }}</td>
+                        <td>{{ $mahasiswa->lowongan->userMentor->mitra->nama ?? 'Belum Ditentukan' }}</td>
+                        <td>{{ $mahasiswa->status }}</td>
+                    </tr> --}}
                 @endforeach
             </tbody>
         </table>

@@ -320,6 +320,22 @@
             </div>
         </div>
     </div>
+    <!-- Modal Notifikasi Sukses -->
+    {{-- <div class="modal fade" id="successAddedModal" tabindex="-1" aria-labelledby="successAddedModalLabel" aria-hidden="true">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 flex flex-col items-center gap-6">
+            <img alt="Illustration of two people working on a computer with a red checkmark and a lightbulb icon above them, on a pink circular background" class="w-40 h-40 object-contain" height="160" src="https://storage.googleapis.com/a1aa/image/8e67e3df-9829-4034-b893-ea8846dfdb2f.jpg" width="160"/>
+            <h2 class="text-center font-extrabold text-lg text-gray-900" id="modal-title">
+                ID Perusahaan Telah Ditambahkan!
+            </h2>
+            <p class="text-center text-xs text-gray-700 max-w-xs leading-tight">
+                ID Perusahaan Baru Telah Ditambahkan, Mentor Bisa Menggunakan ID Ini Untuk Mendaftar
+            </p>
+            <button class="bg-red-700 text-white rounded-full w-full py-2 text-xs font-semibold hover:bg-red-800 transition" type="button">
+                Kembali
+            </button>
+        </div>
+    </div> --}}
+
 
     <!-- Script -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -385,10 +401,11 @@
                     url: actionUrl,
                     data: formData,
                     success: function(response) {
+                        // console.log(response);
                         $('#addModal').modal('hide');
                         showAlert('success', 'Data mitra berhasil ditambahkan.');
                         setTimeout(function() {
-                            location.reload();
+                            // $('#successAddedModal').modal('show');
                         }, 1000);
                     },
                     error: function(xhr) {
