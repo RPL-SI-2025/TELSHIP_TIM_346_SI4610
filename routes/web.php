@@ -13,10 +13,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\AdminLowonganController;
 use App\Http\Controllers\MonitoringMahasiswaController;
-use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SeleksiController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MonitoringLowonganController;
+use App\Http\Controllers\ExcelController;
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -28,6 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pengguna', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/mahasiswa/export-pdf', [AdminController::class, 'exportPDF'])->name('admin.mahasiswa.export-pdf');
     Route::put('/admin/mahasiswa/update/{id}', [AdminController::class, 'updateMahasiswa'])->name('admin.mahasiswa.update');
     Route::delete('/admin/mahasiswa/delete/{id}', [AdminController::class, 'deleteMahasiswa'])->name('admin.mahasiswa.delete');
     Route::get('/admin/mentor', [AdminController::class, 'index_mentor'])->name('admin.mentor');
@@ -38,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/mitra/update/{id}', [AdminController::class, 'updateMitra'])->name('admin.mitra.update');
     Route::delete('/admin/mitra/delete/{id}', [AdminController::class, 'deleteMitra'])->name('admin.mitra.delete');
     Route::post('admin/mitra/store', [AdminController::class, 'storeMitra'])->name('admin.mitra.store');
+    Route::get('/export-excel', [ExcelController::class, 'exportMitraToExcel'])->name('admin.excel.export');
+    Route::post('/import-excel', [ExcelController::class, 'importMitraFromExcel'])->name('admin.excel.import');
+    Route::get('/admin/template/download', [AdminController::class, 'downloadTemplate'])->name('admin.template.download');
+
 });
 
 
@@ -67,7 +72,17 @@ Route::post('/izin', [LaporanController::class, 'store_izin'])->name('izin.store
 Route::get('/mahasiswa/lowongan', [LowonganController::class, 'index_lowongan'])->name('lowongan.index');
 Route::get('mahasiswa/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.detail');
 Route::post('/lamaran/store', [LamaranController::class, 'store'])->name('lamaran.store');
-// route seleski pelamar
+
+Route::get('/mahasiswa/status/lamaran', [MahasiswaController::class, 'index_lamaran'])->name('lamaran.index');
+Route::get('/mahasiswa/kegiatanku', [MahasiswaController::class, 'index_kegiatanku'])->name('mahasiswa.kegiatanku');
+
+Route::post('/mahasiswa/lamaran/{id}/tolak', [LamaranController::class, 'tolak'])->name('lamaran.tolak');
+Route::post('/mahasiswa/lamaran/{id}/terima', [LamaranController::class, 'terima'])->name('lamaran.terima');
+
+
+
+
+
 
 });
 
@@ -77,10 +92,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mentor/lowongan', [MentorController::class, 'showLowongan'])->name('mentor.lowongan');
     Route::get('/mentor/lowongan/{id}', [MentorController::class, 'showDetailLowongan'])->name('mentor.lowongan.detail');
     Route::get('/lowongan/{id}/pelamar', [LowonganController::class, 'pelamar'])->name('mentor.pelamar');
-    Route::post('/pelamar/{id}/terima', [PelamarController::class, 'terima'])->name('mentor.pelamar.terima');
-    Route::post('/pelamar/{id}/tolak', [PelamarController::class, 'tolak'])->name('mentor.pelamar.tolak');
-    Route::get('/pelamar/{id}/profil', [PelamarController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
+    Route::post('/pelamar/{id}/terima', [SeleksiController::class, 'terima'])->name('mentor.pelamar.terima');
+    Route::post('/pelamar/{id}/tolak', [SeleksiController::class, 'tolak'])->name('mentor.pelamar.tolak');
+    Route::get('/pelamar/{id}/profil', [SeleksiController::class, 'lihatProfil'])->name('mentor.pelamar.profil');
     Route::get('/seleksi', [SeleksiController::class, 'index'])->name('seleksi');
+    Route::post('/mentor/laporan/{id}/terima', [MentorController::class, 'terima'])->name('mentor.laporan.terima');
+    Route::post('/mentor/laporan/{id}/tolak', [MentorController::class, 'tolak'])->name('mentor.laporan.tolak');
+    Route::get('/mentor/laporan/{id}/deskripsi', [MentorController::class, 'lihatdeskripsi'])->name('mentor.laporan.deskripsi');
+    Route::get('/mentor/laporan', [MentorController::class, 'index_laporan'])->name('mentor.laporan');
+    Route::get('/mentor/lowongan/{lowonganId}/lamaran-lolos', [MentorController::class, 'getLolosLamaran'])->name('lamaran.getLolos');
 });
 
 

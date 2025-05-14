@@ -82,6 +82,21 @@
 
             <!-- Data Table Section -->
             <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Tambahkan Mentor</button>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('admin.mentor') }}" method="GET" class="d-flex gap-2">
+                            <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan ID, nama, atau email..." value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-danger">Cari</button>
+                            @if(request('search'))
+                                <a href="{{ route('admin.mentor') }}" class="btn btn-secondary">Reset</a>
+                            @endif
+                        </form>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped border">
                         <thead>
@@ -112,14 +127,14 @@
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
-                                            <form action="{{ url('admin/mentor/delete/' . $mnt->id_mentor) }}" method="POST">
+                                            <!-- <form action="{{ url('admin/mentor/delete/' . $mnt->id_mentor) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="action-btn delete-btn"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </form>
+                                            </form> -->
                                         </div>
                                     </td>
                                 </tr>

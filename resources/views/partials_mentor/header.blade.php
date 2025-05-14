@@ -135,7 +135,7 @@
 
         .page-item.active .page-link {
             border-color: #4EA971 !important;
-            background-color: #4EA971 !important;
+            background-color: #ff0000 !important;
             color: #fff;
         }
 

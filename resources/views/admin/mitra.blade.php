@@ -80,6 +80,31 @@
 
             <!-- Data Table Section -->
             <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addModal">Tambahkan Mitra</button>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('admin.mitra') }}" method="GET" class="d-flex gap-2">
+                            <input type="text" name="search" class="form-control"
+                                placeholder="Cari berdasarkan ID, nama perusahaan, atau email..."
+                                value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-danger">Cari</button>
+                            @if (request('search'))
+                                <a href="{{ route('admin.mitra') }}" class="btn btn-secondary">Reset</a>
+                            @endif
+                        </form>
+                        <a href="{{ route('admin.excel.export') }}" class="btn"
+                            style="background-color:#EC1D24; color: white;">
+                            <i class="fas fa-file-excel me-2"></i> Export Excel
+                        </a>
+                        <button type="button" style="background-color:#EC1D24; color: white;" class="btn"
+                            data-bs-toggle="modal" data-bs-target="#importModal">
+                            <i class="fas fa-file-excel me-2"></i> Import Excel
+                        </button>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped border">
                         <thead>
@@ -102,27 +127,24 @@
                                     <td>{{ $mtr->alamat }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <button class="action-btn edit-btn"
-                                                data-id="{{ $mtr->id_perusahaan }}"
+                                            <button class="action-btn edit-btn" data-id="{{ $mtr->id_perusahaan }}"
                                                 data-nama_perusahaan="{{ $mtr->nama_perusahaan }}"
-                                                data-email="{{ $mtr->email }}"
-                                                data-telepon="{{ $mtr->telepon }}"
+                                                data-email="{{ $mtr->email }}" data-telepon="{{ $mtr->telepon }}"
                                                 data-alamat="{{ $mtr->alamat }}"
                                                 data-deskripsi_perusahaan="{{ $mtr->deskripsi_perusahaan }}"
-                                                data-link_website="{{ $mtr->link_website }}"
-                                                data-bs-toggle="modal"
+                                                data-link_website="{{ $mtr->link_website }}" data-bs-toggle="modal"
                                                 data-bs-target="#editModal">
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
                                             <!-- <form action="{{ url('admin/mitra/delete/' . $mtr->id_perusahaan) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="action-btn delete-btn"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form> -->
+                                                                                                                            @csrf
+                                                                                                                            @method('DELETE')
+                                                                                                                            <button type="submit" class="action-btn delete-btn"
+                                                                                                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                                                                                <i class="fas fa-trash"></i>
+                                                                                                                            </button>
+                                                                                                                        </form> -->
                                         </div>
                                     </td>
                                 </tr>
@@ -151,7 +173,8 @@
             <div class="modal-content rounded-4 shadow">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title text-white" id="editModalLabel">Edit Mitra</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <form id="edit-form" method="POST">
                     @csrf
@@ -159,7 +182,8 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="edit-nama_perusahaan" class="form-label">Nama Perusahaan</label>
-                            <input type="text" name="nama_perusahaan" id="edit-nama_perusahaan" class="form-control" required>
+                            <input type="text" name="nama_perusahaan" id="edit-nama_perusahaan" class="form-control"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="edit-email" class="form-label">Email</label>
@@ -191,20 +215,81 @@
         </div>
     </div>
 
+    <!-- Modal Import -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">Import Data Mitra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Button to Download Template -->
+                    <a href="{{ route('admin.template.download') }}" class="btn btn-success mb-3">Download Template</a>
+
+                    <!-- Form for Importing Excel -->
+                    <form id="importForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="file_excel" class="form-label">Pilih File Excel</label>
+                            <input type="file" name="file_excel" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Import Excel</button>
+                    </form>
+
+                    <!-- Result Section (Initially Hidden) -->
+                    <div id="importResult" class="mt-3" style="display: none;">
+                        <div class="alert" id="importAlert">
+                            <div id="importMessage"></div>
+                        </div>
+
+                        <!-- Error Details Section -->
+                        <div id="errorDetails" style="display: none;">
+                            <h6 class="mt-3">Detail Error:</h6>
+                            <div class="accordion" id="errorAccordion">
+                                <!-- Error items will be inserted here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal for showing import progress -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalLabel">Hasil Import</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="resultModalBody">
+                    <!-- Result content will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Add -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content rounded-4 shadow">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title text-white" id="addModalLabel">Tambah Mitra</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <form id="add-form" method="POST" action="{{ url('admin/mitra/store') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="add-nama_perusahaan" class="form-label">Nama Perusahaan</label>
-                            <input type="text" name="nama_perusahaan" id="add-nama_perusahaan" class="form-control" required>
+                            <input type="text" name="nama_perusahaan" id="add-nama_perusahaan" class="form-control"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="add-email" class="form-label">Email</label>
@@ -213,24 +298,24 @@
                         <div class="mb-3">
                             <label for="add-telepon" class="form-label">Telepon</label>
                             <input type="text" name="telepon" id="add-telepon" class="form-control" required>
-                        </soaldiv>
-                        <div class="mb-3">
-                            <label for="add-alamat" class="form-label">Alamat</label>
-                            <input type="text" name="alamat" id="add-alamat" class="form-control" required>
+                            </soaldiv>
+                            <div class="mb-3">
+                                <label for="add-alamat" class="form-label">Alamat</label>
+                                <input type="text" name="alamat" id="add-alamat" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="add-deskripsi_perusahaan" class="form-label">Deskripsi Perusahaan</label>
+                                <textarea name="deskripsi_perusahaan" id="add-deskripsi_perusahaan" class="form-control"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="add-link_website" class="form-label">Link Website</label>
+                                <input type="url" name="link_website" id="add-link_website" class="form-control">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="add-deskripsi_perusahaan" class="form-label">Deskripsi Perusahaan</label>
-                            <textarea name="deskripsi_perusahaan" id="add-deskripsi_perusahaan" class="form-control"></textarea>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-danger">Tambah Mitra</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="add-link_website" class="form-label">Link Website</label>
-                            <input type="url" name="link_website" id="add-link_website" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-danger">Tambah Mitra</button>
-                    </div>
                 </form>
             </div>
         </div>
@@ -330,6 +415,97 @@
                     $('.alert').alert('close');
                 }, 4000);
             }
+        });
+
+        $(document).ready(function() {
+            $('#importForm').on('submit', function(e) {
+                e.preventDefault();
+
+                // Show loading indicator
+                $('#importResult').hide();
+                $('#importMessage').html(
+                    '<div class="d-flex justify-content-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>'
+                );
+                $('#importResult').show();
+
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('admin.excel.import') }}",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Handle success
+                        $('#importAlert').removeClass('alert-danger').addClass('alert-success');
+                        $('#importMessage').html(
+                            `<strong>Sukses!</strong> ${response.imported} data mitra berhasil diimport.`
+                        );
+                        $('#errorDetails').hide();
+
+                        // Reset form
+                        $('#importForm')[0].reset();
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        let response = xhr.responseJSON;
+
+                        if (response && response.status === 'partial_success') {
+                            $('#importAlert').removeClass('alert-success').addClass(
+                                'alert-warning');
+                            $('#importMessage').html(
+                                `<strong>Hasil :</strong> ${response.imported} data berhasil diimport, namun ada beberapa error.`
+                            );
+
+                            // Display errors in accordion
+                            let errorHtml = '';
+                            response.errors.forEach((item, index) => {
+                                errorHtml += `
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading${index}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                        data-bs-target="#collapse${index}" aria-expanded="false" aria-controls="collapse${index}">
+                                    Error pada baris ${item.row}
+                                </button>
+                            </h2>
+                            <div id="collapse${index}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#errorAccordion">
+                                <div class="accordion-body">
+                                    <strong>Error:</strong>
+                                    <ul>
+                                        ${item.errors.map(err => `<li>${err}</li>`).join('')}
+                                    </ul>
+                                    <strong>Data:</strong>
+                                    <ul>
+                                        <li>Nama Perusahaan: ${item.data.nama_perusahaan || '-'}</li>
+                                        <li>Deskripsi: ${item.data.deskripsi_perusahaan || '-'}</li>
+                                        <li>Alamat: ${item.data.alamat || '-'}</li>
+                                        <li>Email: ${item.data.email || '-'}</li>
+                                        <li>Telepon: ${item.data.telepon || '-'}</li>
+                                        <li>Website: ${item.data.link_website || '-'}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                            });
+
+                            $('#errorAccordion').html(errorHtml);
+                            $('#errorDetails').show();
+                        } else {
+                            $('#importAlert').removeClass('alert-success').addClass(
+                                'alert-danger');
+                            $('#importMessage').html(
+                                '<strong>Error!</strong> Terjadi kesalahan saat mengimpor data.'
+                            );
+                            $('#errorDetails').hide();
+                        }
+
+                        // Reset form
+                        $('#importForm')[0].reset();
+                    }
+                });
+            });
         });
     </script>
 @endsection

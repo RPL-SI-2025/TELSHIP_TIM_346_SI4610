@@ -7,14 +7,16 @@
   
  class SeleksiController extends Controller
  {
-     public function index()
-     {
-         $lamarans = Lamaran::with(['lowongan', 'lowongan.usermentor'])
-                             ->where('status', 'diproses')
-                             ->get();
-  
-         return view('mentor.seleksi', compact('lamarans'));
-     }
+    public function index($id_lowongan)
+    {
+        $lamarans = Lamaran::with(['lowongan', 'lowongan.usermentor'])
+                            ->where('status', 'diproses')
+                            ->where('id_lowongan', $id_lowongan)
+                            ->get();
+
+        return view('mentor.seleksi', compact('lamarans', 'id_lowongan'));
+    }
+    
   
      public function terima($id_lamaran)
      {
