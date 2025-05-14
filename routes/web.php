@@ -109,8 +109,8 @@ Route::post('/admin/id-perusahaan', [CompanyController::class, 'store'])->name('
 Route::get('lowongan', [AdminLowonganController::class, 'index'])->name('lowongan.index');
 Route::post('lowongan/{id}/approve', [AdminLowonganController::class, 'approve'])->name('lowongan.approve');
 Route::post('lowongan/{id}/reject', [AdminLowonganController::class, 'reject'])->name('lowongan.reject');
-Route::get('monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');
-Route::get('/monitoring/lowongan', [MonitoringLowonganController::class, 'index'])->name('monitoring.lowongan');
+Route::get('/admin/monitoring/mahasiswa', [MonitoringMahasiswaController::class, 'index'])->name('monitoring.mahasiswa');
+Route::get('/admin/monitoring/lowongan', [MonitoringLowonganController::class, 'index'])->name('monitoring.lowongan');
 
 Route::get('/admin/lowongan/approval', [LowonganController::class, 'approvalIndex'])->name('lowongan.approval');
 // Route::get('/admin/lowongan/{id}', [LowonganController::class, 'detailAdmin'])->name('lowongan.detail');

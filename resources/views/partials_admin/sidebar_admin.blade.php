@@ -5,7 +5,7 @@
     }
     $activePage = $activePage ?? '';
 @endphp
-<div class="p-3" style="width: 250px; background-color: #ffffff; box-shadow: 0 0 10px rgba(0,0,0,0.05); height: 100%;">
+<div class="p-3" dusk="sidebar-lowongan" style="width: 250px; background-color: #ffffff; box-shadow: 0 0 10px rgba(0,0,0,0.05); height: 100%;">
     <h6 class="text-muted mb-4" style="margin-top: 60px;">Menu</h6>
 
     <ul class="nav flex-column" style="list-style: none; padding-left: 0;">
@@ -32,8 +32,8 @@
         </li>
 
         <li class="nav-item mb-2">
-            @if (Request::is('admin/lowongan/approval',))
-                <a href="a/admin/lowongan/approval" class="nav-link text-decoration-none"
+            @if (Request::is('admin/lowongan/approval'))
+                <a href="/admin/lowongan/approval" dusk="sidebar-lowongan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/lowongan-icon.svg') }}" alt="Lowongan" width="18"
@@ -42,7 +42,7 @@
                     </span>
                 </a>
             @else
-                <a href="/admin/lowongan/approval" class="nav-link text-decoration-none"
+                <a href="/admin/lowongan/approval" dusk="sidebar-lowongan" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/lowongan-icon-no.svg') }}" alt="Lowongan" width="18"
@@ -53,9 +53,9 @@
             @endif
         </li>
         <li class="nav-item mb-2">
-            @if (Request::is('monitoring/mahasiswa', 'monitoring/lowongan'))
+            @if (Request::is('admin/monitoring/mahasiswa', 'admin/monitoring/lowongan'))
                 <!-- Versi dengan border merah dan teks merah untuk menu aktif -->
-                <a href="/monitoring/mahasiswa" class="nav-link text-decoration-none"
+                <a href="/admin/monitoring/mahasiswa" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/report-icon.svg') }}" alt="Laporan" width="18"
@@ -65,7 +65,7 @@
                 </a>
             @else
                 <!-- Versi dengan latar belakang abu-abu untuk menu tidak aktif -->
-                <a href="/monitoring/mahasiswa" class="nav-link text-decoration-none"
+                <a href="/admin/monitoring/mahasiswa" class="nav-link text-decoration-none"
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/report-icon-no.svg') }}" alt="Laporan" width="18"

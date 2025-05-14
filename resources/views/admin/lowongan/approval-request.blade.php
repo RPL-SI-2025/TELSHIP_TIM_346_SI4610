@@ -14,7 +14,7 @@
 
     @forelse($lowongans as $lowongan)
         <div 
-            class="d-flex align-items-center justify-content-between p-3 mb-3 shadow-sm rounded bg-white"
+            class="lowongan-card d-flex align-items-center justify-content-between p-3 mb-3 shadow-sm rounded bg-white"
             data-bs-toggle="modal"
             data-bs-target="#detailModal"
             onclick="showDetail(
@@ -42,11 +42,13 @@
             <div class="d-flex align-items-center gap-2">
                 <form action="{{ route('lowongan.approve', $lowongan->id_lowongan) }}" method="POST" class="d-inline">
                     @csrf
-                    <button class="btn btn-success" onclick="event.stopPropagation();">Setujui</button>
+                    <button id="btn-approve" class="btn" onclick="event.stopPropagation();" style="background-color: #e7ffea; color: #2ae330 ; border: 1px solid #2ae330; padding: 8px 16px; border-radius: 6px; margin-right: 8px;">
+                    Setujui</button>
                 </form>
                 <form action="{{ route('lowongan.reject', $lowongan->id_lowongan) }}" method="POST" class="d-inline">
                     @csrf
-                    <button class="btn btn-danger" onclick="event.stopPropagation();">Tolak</button>
+                    <button id="btn-reject" class="btn btn-danger" onclick="event.stopPropagation();" style="background-color: #fff5f5; color: #b30000; border: 1px solid #b30000; padding: 8px 16px; border-radius: 6px;">
+                    Tolak</button>
                 </form>
             </div>
 

@@ -33,8 +33,8 @@
     </div>
 
     <div class="d-flex gap-2 mb-3">
-        <a href="{{ route('monitoring.mahasiswa') }}" class="btn btn-light border fw-bold text-muted">MAHASISWA</a>
-        <a href="{{ route('monitoring.lowongan') }}" class="btn btn-outline-danger fw-bold">LOWONGAN</a>
+        <a id="monitoring-mahasiswa" href="{{ route('monitoring.mahasiswa') }}" class="btn btn-light border fw-bold text-muted">MAHASISWA</a>
+        <a id="monitoring-lowongan" href="{{ route('monitoring.lowongan') }}" class="btn btn-outline-danger fw-bold">LOWONGAN</a>
     </div>
 
     <div class="table-responsive">
