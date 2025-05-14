@@ -2,33 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
 class MonitoringMahasiswaController extends Controller
 {
     public function index()
     {
-        // Simulasi data mahasiswa (nanti bisa diambil dari database kalau mau)
-        $dataMahasiswa = [
-            [
-                'nim' => '1202220000',
-                'nama' => 'Muhammad Naufal',
-                'jurusan' => 'S1 Sistem Informasi',
-                'no_hp' => '0821211121334',
-                'perusahaan' => 'PT. Telkom',
-                'status' => 'Selesai',
-            ],
-            [
-                'nim' => '1202220000',
-                'nama' => 'Muhammad Naufal',
-                'jurusan' => 'S1 Sistem Informasi',
-                'no_hp' => '0821211121334',
-                'perusahaan' => 'PT. Telkom',
-                'status' => 'Berlangsung',
-            ],
-        ];
+        // // Ambil semua mahasiswa beserta relasi hingga ke mitra
+        // $mahasiswas = Mahasiswa::with([
+        //     'lowongan.userMentor.mitra'
+        // ])->get();
 
-        return view('admin.monitoring.monitoring-mahasiswa', ['activePage' => 'monitoring'], compact('dataMahasiswa'));
+        // // Statistik mahasiswa
+        // $total_mahasiswa = Mahasiswa::count();
+        // $mahasiswa_aktif = Mahasiswa::where('status', 'Aktif')->count();
+        // $mahasiswa_selesai = Mahasiswa::where('status', 'Selesai')->count();
+
+        // return view('admin.monitoring.monitoring-mahasiswa', [
+        //     'activePage' => 'monitoring',
+        //     'mahasiswas' => $mahasiswas,
+        //     'total_mahasiswa' => $total_mahasiswa,
+        //     'mahasiswa_aktif' => $mahasiswa_aktif,
+        //     'mahasiswa_selesai' => $mahasiswa_selesai,
+        // ]);
     }
 }

@@ -322,7 +322,10 @@ class AdminController extends Controller
             $mitra->link_website = $request->link_website;
             $mitra->save();
 
-            return response()->json(['message' => 'Data mitra berhasil ditambahkan.']);
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'Data mitra berhasil ditambahkan.'
+            // ]);
         } catch (\Exception $e) {
             return response()->json(['errors' => ['message' => 'Gagal menambahkan data: ' . $e->getMessage()]], 422);
         }
