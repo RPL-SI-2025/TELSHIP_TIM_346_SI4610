@@ -41,4 +41,10 @@
      {
          return $this->hasMany(Lamaran::class, 'id_mahasiswa', 'id_mahasiswa');
      }
+     
+    //  public function lowongan()
+    //  {
+    //      return $this->belongsTo(Lowongan::class, 'id_mahasiswa', 'id_mahasiswa');
+    //  }
+
  }

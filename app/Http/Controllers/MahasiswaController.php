@@ -1,7 +1,7 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Mahasiswa;
@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dokumen;
 use Illuminate\Support\Str;
-
-
+use App\Models\Lamaran;
+use Illuminate\Support\Facades\DB;
+ 
+ 
 class MahasiswaController extends Controller
 {
     public function index()
@@ -37,7 +39,7 @@ class MahasiswaController extends Controller
         // Kirim data ke view
         return view('mahasiswa.profile', compact('user', 'mahasiswa', 'dokumen'));
     }
-
+ 
     public function update(Request $request, $id)
     {
         // Validasi input
@@ -54,7 +56,7 @@ class MahasiswaController extends Controller
             'sertifikat' => 'nullable|url',
             'dokumen_tambahan' => 'nullable|url',
         ]);
-
+ 
         // Ambil data user
         $user = User::findOrFail($id);
         
@@ -125,4 +127,55 @@ class MahasiswaController extends Controller
         
         return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diperbarui');
     }
+ 
+ 
+    public function index_lamaran()
+    {
+        $user = Auth::user();
+ 
+        $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
+ 
+        if (!$mahasiswa) {
+            return redirect()->route('login')->with('error', 'Hanya mahasiswa yang bisa mengakses halaman ini.');
+        }
+ 
+        $id_mahasiswa = $mahasiswa->id_mahasiswa;
+ 
+        $lamarans = Lamaran::where('id_mahasiswa', $id_mahasiswa)->get();
+ 
+        $lamaranLolos = $lamarans->firstWhere('status', 'lolos');
+ 
+        return view('mahasiswa.status_lamaran', [
+            'activePage' => 'status',
+            'user' => $user,
+            'mahasiswa' => $mahasiswa,
+            'lamaran' => $lamarans,
+            'id_mahasiswa' => $id_mahasiswa,
+            'lamaranLolos' => $lamaranLolos, // kirim ke view
+        ]);
+    }
+ 
+    public function index_kegiatanku()
+    {
+        $user = Auth::user();
+ 
+        $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
+ 
+        if (!$mahasiswa) {
+            return redirect()->route('login')->with('error', 'Hanya mahasiswa yang bisa mengakses halaman ini.');
+        }
+ 
+        $id_mahasiswa = $mahasiswa->id_mahasiswa;
+ 
+        $lamarans = Lamaran::where('id_mahasiswa', $id_mahasiswa)->get();
+ 
+        return view('mahasiswa.kegiatanku', [
+            'activePage' => 'kegiatanku',
+            'user' => $user,
+            'mahasiswa' => $mahasiswa,
+            'lamaran' => $lamarans,
+            'id_mahasiswa' => $id_mahasiswa,
+        ]);
+    }
+    
 }

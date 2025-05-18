@@ -1,15 +1,21 @@
 @extends('partials_mahasiswa_login.template')
-
+ 
 @section('main')
     <style>
         body {
             background-color: white !important;
         }
+ 
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #dc3545 !important;
+            /* merah Bootstrap */
+            color: #fff !important;
+        }
     </style>
     <div class="d-flex" style="min-height: 100vh">
-
+ 
         @include('partials_mahasiswa_login.sidebar_mahasiswa')
-
+ 
         <div class="flex-grow-1">
             <!-- Banner -->
             <div class="position-relative text-white"
@@ -17,18 +23,39 @@
                 <h1 class="fw-bold p-4 text-white" style="color: white;">LOWONGAN MAHASISWA</h1>
                 <img src="{{ asset('assets/images/ft3.svg') }}" alt="Banner" class="position-absolute end-0 top-0 h-100">
             </div>
-
+ 
             <!-- Filter and Search -->
             <div class="d-flex align-items-center gap-3 mx-4 mt-4">
                 <!-- Tombol Filter -->
-                <button class="btn btn-outline-danger d-flex align-items-center position-relative"
-                    style="border-radius: 8px; padding: 10px 16px;">
-                    <img src="/assets/icons/vector.svg" alt="Filter" class="me-2" style="width: 16px; height: 16px;">
-                    Filter
-                    <span class="position-absolute top-0 start-100 translate-middle" style="font-size: 0.7rem;">
-                    </span>
-                </button>
-
+                <form method="GET" class="d-flex align-items-center gap-3">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="border-radius: 8px; padding: 10px 16px;">
+                            <img src="/assets/icons/vector.svg" alt="Filter" class="me-2"
+                                style="width: 16px; height: 16px;">
+                            Filter
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button class="dropdown-item" type="submit" name="perusahaan" value="">Semua
+                                    Perusahaan</button>
+                            </li>
+                            @foreach ($daftarPerusahaan as $perusahaan)
+                                <li>
+                                    <button class="dropdown-item" type="submit" name="perusahaan"
+                                        value="{{ $perusahaan }}">
+                                        {{ $perusahaan }}
+                                    </button>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </form>
+ 
+ 
+ 
+ 
+ 
                 <!-- Search Box -->
                 <div class="position-relative" style="max-width: 250px; width: 100%;">
                     <input type="text" class="form-control ps-5" placeholder="Search here" style="border-radius: 8px;">
@@ -36,7 +63,7 @@
                         class="position-absolute top-50 start-0 translate-middle-y ms-3" style="width: 16px; height: 16px;">
                 </div>
             </div>
-
+ 
             <div class="mx-4 mt-4">
                 <div class="row">
                     @foreach ($lowongans as $lowongan)
