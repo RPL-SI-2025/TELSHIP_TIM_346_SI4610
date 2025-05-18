@@ -1,40 +1,55 @@
 @extends('partials_admin.template')
 
 @section('main')
-<div class="container py-4">
-    <div class="row g-3 mb-5">
-        <div class="col-md-4">
-            <div class="card text-center border-0 shadow-sm" style="height: 100%;">
-                <div class="card-body py-4">
-                    <i class="bi bi-people-fill text-danger" style="font-size: 1.5rem;"></i>
-                    <h4 class="mt-3 fw-bold">{{ $total_peserta ?? 0 }}</h4>
-                    <p class="text-muted mb-0">Peserta Magang</p>
+    <div class="container py-4">
+        <div class="row g-3 mb-3 mt-3">
+            <div class="col-md-4">
+                <div class="card border rounded-4 py-3 px-4 shadow-sm h-100">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 50px; height: 50px; background-color: rgba(236, 29, 36, 0.1);">
+                            <img src="{{ asset('assets/icons/star.svg') }}" alt="icon" width="22">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-0">{{ $total_mahasiswa }}</h4>
+                            <p class="text-muted mb-0">Peserta Magang</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border rounded-4 py-3 px-4 shadow-sm h-100">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 50px; height: 50px; background-color: rgba(236, 29, 36, 0.1);">
+                            <img src="{{ asset('assets/icons/star.svg') }}" alt="icon" width="22">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-0">{{ $lowongan_aktif }}</h4>
+                            <p class="text-muted mb-0">Lowongan Magang Aktif</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border rounded-4 py-3 px-4 shadow-sm h-100">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 50px; height: 50px; background-color: rgba(236, 29, 36, 0.1);">
+                            <img src="{{ asset('assets/icons/star.svg') }}" alt="icon" width="22">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-0">{{ $mahasiswa_selesai }}</h4>
+                            <p class="text-muted mb-0">Peserta Telah Lulus</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-center border-0 shadow-sm" style="height: 100%;">
-                <div class="card-body py-4">
-                    <i class="bi bi-briefcase-fill text-danger" style="font-size: 1.5rem;"></i>
-                    <h4 class="mt-3 fw-bold">{{ $lowongan_aktif ?? 0 }}</h4>
-                    <p class="text-muted mb-0">Lowongan Magang Aktif</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center border-0 shadow-sm" style="height: 100%;">
-                <div class="card-body py-4">
-                    <i class="bi bi-award-fill text-danger" style="font-size: 1.5rem;"></i>
-                    <h4 class="mt-3 fw-bold">{{ $peserta_lulus ?? 0 }}</h4>
-                    <p class="text-muted mb-0">Peserta Telah Lulus</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="d-flex gap-2 mb-3">
-        <a href="{{ route('monitoring.mahasiswa') }}" class="btn btn-light border fw-bold text-muted">MAHASISWA</a>
-        <a href="{{ route('monitoring.lowongan') }}" class="btn btn-outline-danger fw-bold">LOWONGAN</a>
+        <a id="monitoring-mahasiswa" href="{{ route('monitoring.mahasiswa') }}" class="btn btn-light border fw-bold text-muted">MAHASISWA</a>
+        <a id="monitoring-lowongan" href="{{ route('monitoring.lowongan') }}" class="btn btn-outline-danger fw-bold">LOWONGAN</a>
     </div>
 
     <div class="table-responsive">
