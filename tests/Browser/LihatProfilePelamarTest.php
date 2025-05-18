@@ -15,24 +15,15 @@ test('mentor dapat login', function () {
     });
 });
 
-test('mentor dapat menolak pelamar', function () {
+test('mentor dapat melihat profile pelamar', function () {
     $this->browse(function (Browser $browser) {
         $browser->visit('/mentor/seleksi/2')
             ->pause(1000)
-            ->assertSee('Mark Lee') 
-            ->press('Tolak') 
+            ->assertSee('Muhammad Asahi') 
+            ->press('Lihat Profil') 
             ->pause(1000)
-            ->assertSee('Lamaran ditolak');
-    });
-});
-
-test('mentor dapat menerima pelamar', function () {
-    $this->browse(function (Browser $browser) {
-        $browser->visit('/mentor/seleksi/2')
+            ->assertSee('Detail Profil Mahasiswa')
             ->pause(1000)
-            ->assertSee('Jeong Jaehyun')
-            ->press('Terima')
-            ->pause(1000)
-            ->assertSee('Lamaran diterima');
+            ->press('Tutup');
     });
 });
