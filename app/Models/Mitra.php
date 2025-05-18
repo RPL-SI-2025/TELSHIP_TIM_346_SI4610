@@ -23,4 +23,8 @@ class Mitra extends Model
     {
         return $this->hasMany(UserMentor::class, 'id_perusahaan', 'id_perusahaan');
     }
+    public function userMentor()
+    {
+        return $this->hasMany(UserMentor::class, 'id_perusahaan', 'id_perusahaan');
+    }
 }

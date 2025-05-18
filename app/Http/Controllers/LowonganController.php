@@ -7,6 +7,8 @@ use App\Models\Lowongan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Mahasiswa;
 use Illuminate\Routing\Controller;
+use App\Models\Mitra;
+use App\Models\UserMentor;
  
 class LowonganController extends Controller
 {
@@ -17,7 +19,6 @@ class LowonganController extends Controller
  
     public function index_lowongan()
     {
- 
         $user = Auth::user();
  
         $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
@@ -28,15 +29,35 @@ class LowonganController extends Controller
  
         $id_mahasiswa = $mahasiswa->id_mahasiswa;
  
-        $lowongans = Lowongan::with(['userMentor.mitra'])->where('status', 'disetujui')->get();
+        // Ambil daftar nama perusahaan unik
+        $daftarPerusahaan = Mitra::whereHas('userMentor.lowongans', function ($q) {
+            $q->where('status', 'disetujui');
+        })->pluck('nama_perusahaan');
+ 
+        // Ambil semua lowongan disetujui
+        $query = Lowongan::with(['userMentor.mitra'])
+            ->where('status', 'disetujui');
+ 
+        // Filter berdasarkan perusahaan jika ada
+        if (request()->filled('perusahaan')) {
+            $query->whereHas('userMentor.mitra', function ($q) {
+                $q->where('nama_perusahaan', request('perusahaan'));
+            });
+        }
+ 
+        $lowongans = $query->get();
  
         return view('mahasiswa.lowongan', [
             'activePage' => 'laporan',
             'lowongans' => $lowongans,
             'id_mahasiswa' => $id_mahasiswa,
             'mahasiswa' => $mahasiswa,
+            'daftarPerusahaan' => $daftarPerusahaan, // dikirim ke view
         ]);
     }
+ 
+    
+ 
  
     public function show($id)
     {
