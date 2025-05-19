@@ -76,11 +76,124 @@
 
     @yield('page_style')
     <style>
+        /* Dropdown Animation */
         .dropdown-menu {
             z-index: 9999;
             min-width: 10rem;
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,.15);
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-in-out;
         }
 
+        .dropdown-menu.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Dropdown Items Animation */
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item:hover {
+            color: #4EA971;
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        .dropdown-item i {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .dropdown-item:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Dropdown Toggle Animation */
+        .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.show .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        /* Navbar Animation */
+        .layout-navbar {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .layout-navbar:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Avatar Animation */
+        .avatar img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .avatar:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Notification Icon Animation */
+        .nav-link i {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Dropdown Divider Animation */
+        .dropdown-divider {
+            height: 0;
+            margin: 0.5rem 0;
+            overflow: hidden;
+            border-top: 1px solid #e9ecef;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown-menu:hover .dropdown-divider {
+            border-color: #4EA971;
+        }
+
+        .nav-item.dropdown {
+            position: relative;
+        }
 
         .bg-menu-theme.menu-vertical .menu-item.active>.menu-link:not(.menu-toggle) {
             background: #4EA971 !important;
@@ -320,11 +433,11 @@
                     </div>
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <!-- Notification -->
-                        <li class="nav-item me-3 me-xl-1">
+                        <!-- <li class="nav-item me-3 me-xl-1">
                             <a class="nav-link" href="javascript:void(0);">
                                 <i class="ti ti-bell ti-md"></i>
                             </a>
-                        </li>
+                        </li> -->
 
                         <!-- Divider -->
                         <li class="nav-item me-3 me-xl-1 d-none d-lg-block">
@@ -336,34 +449,23 @@
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="avatar me-3 mt-n1">
-                                    {{-- @if ($mahasiswa->foto_profile)
-                                        <img src="{{ Storage::url('fotos/' . $mahasiswa->foto_profile) }}"
-                                            alt="Foto Profil" style="width: 50px; height: 50px; object-fit: cover;"
-                                            class="rounded-circle"
-                                            onerror="this.src='{{ asset('app-assets/img/avatars/1.png') }}'">
-                                    @else
-                                        <img src="{{ asset('images/default-profile.png') }}" alt="Foto Default"
-                                            style="width: 50px; height: 50px; object-fit: cover;"
-                                            class="rounded-circle">
-                                    @endif --}}
+                                    <img src="{{ asset('app-assets/img/avatars/1.png') }}" alt="Foto Default"
+                                        style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle">
                                 </div>
+                                <span class="fw-medium">{{ Auth::user()->name }}</span>
                             </a>
 
-                            <ul class="dropdown-menu dropdown-menu-end" style="position: absolute;"
-                                data-bs-popper="static">
-                                <li><a class="dropdown-item" href="{{ route('mahasiswa.index') }}"><i
-                                            class="ti ti-user me-2"></i>Profil</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" style="margin-top: 0.5rem;">
+                                <li><a class="dropdown-item" href="#"><i class="ti ti-user me-2"></i>Profil</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="ti ti-logout me-2"></i>Logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
                                         @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="ti ti-logout me-2"></i> Logout
+                                        </button>
                                     </form>
                                 </li>
                             </ul>
