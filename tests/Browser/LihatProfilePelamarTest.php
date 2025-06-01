@@ -17,10 +17,10 @@ test('mentor dapat login', function () {
 
 test('mentor dapat melihat profile pelamar', function () {
     $this->browse(function (Browser $browser) {
-        $browser->visit('/mentor/seleksi/2')
+        $browser->visit('/seleksi/2')
             ->pause(1000)
             ->assertSee('Muhammad Asahi') 
-            ->press('Lihat Profil') 
+            -> clicklink('Lihat Profil') 
             ->pause(1000)
             ->assertSee('Detail Profil Mahasiswa')
             ->pause(1000)

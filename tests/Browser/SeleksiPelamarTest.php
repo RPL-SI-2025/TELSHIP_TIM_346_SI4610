@@ -17,7 +17,7 @@ test('mentor dapat login', function () {
 
 test('mentor dapat menolak pelamar', function () {
     $this->browse(function (Browser $browser) {
-        $browser->visit('/mentor/seleksi/2')
+        $browser->visit('/seleksi/2')
             ->pause(1000)
             ->assertSee('Mark Lee') 
             ->press('Tolak') 
@@ -28,7 +28,7 @@ test('mentor dapat menolak pelamar', function () {
 
 test('mentor dapat menerima pelamar', function () {
     $this->browse(function (Browser $browser) {
-        $browser->visit('/mentor/seleksi/2')
+        $browser->visit('/seleksi/2')
             ->pause(1000)
             ->assertSee('Jeong Jaehyun')
             ->press('Terima')

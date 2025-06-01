@@ -17,10 +17,9 @@ test('mentor dapat login', function () {
 
 test('mentor dapat melihat detail laporan', function () {
     $this->browse(function (Browser $browser) {
-        $browser->visit('/mentor/seleksi/2')
-            ->pause(1000)
+        $browser->visit('/mentor/laporan')
             ->assertSee('Mark Lee') 
-            ->press('Lihat Detail') 
+            ->clicklink('Lihat Detail') 
             ->pause(1000)
             ->assertSee('Detail Profil Mahasiswa')
             ->pause(1000)
