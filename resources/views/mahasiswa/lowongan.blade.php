@@ -64,6 +64,7 @@
                 </div>
             </div> -->
  
+            
             <div class="mx-4 mt-4">
                 <div class="row">
                     @foreach ($lowongans as $lowongan)
