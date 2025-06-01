@@ -15,24 +15,24 @@ test('mentor dapat login', function () {
     });
 });
 
-test('mentor dapat menolak pelamar', function () {
+test('mentor dapat menerima laporan harian', function () {
     $this->browse(function (Browser $browser) {
-        $browser->visit('/seleksi/2')
+        $browser->visit('/mentor/laporan')
             ->pause(1000)
             ->assertSee('Mark Lee') 
-            ->press('Tolak') 
+            ->press('Terima') 
             ->pause(1000)
-            ->assertSee('Lamaran ditolak');
+            ->assertSee('Laporan diterima');
     });
 });
 
-test('mentor dapat menerima pelamar', function () {
+test('mentor dapat menolak laporan harian', function () {
     $this->browse(function (Browser $browser) {
-        $browser->visit('/seleksi/2')
+        $browser->visit('/mentor/laporan')
             ->pause(1000)
-            ->assertSee('Jeong Jaehyun')
-            ->press('Terima')
+            ->assertSee('Jeong Jaehyun') 
+            ->press('Tolak') 
             ->pause(1000)
-            ->assertSee('Lamaran diterima');
+            ->assertSee('Laporan ditolak');
     });
 });
