@@ -59,7 +59,7 @@
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #ffffff; border: 1px solid #e74c3c;">
                     <span style="color: #e74c3c; font-weight: 600;">
                         <img src="{{ asset('assets/icons/report-icon.svg') }}" alt="Laporan" width="18"
-                            style="margin-right: 8px;">
+                            style="margin-right: 8px;" dusk="sidebar-monitoring">
                         MONITORING
                     </span>
                 </a>
@@ -69,7 +69,7 @@
                     style="display: block; padding: 10px 12px; border-radius: 6px; background-color: #f0f0f0; border: none;">
                     <span style="color: #a0a0a0; font-weight: 400;">
                         <img src="{{ asset('assets/icons/report-icon-no.svg') }}" alt="Laporan" width="18"
-                            style="margin-right: 8px;">
+                            style="margin-right: 8px;" dusk="sidebar-monitoring">
                         MONITORING
                     </span>
                 </a>
