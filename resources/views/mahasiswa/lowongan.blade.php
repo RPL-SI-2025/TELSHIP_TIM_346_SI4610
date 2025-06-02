@@ -57,13 +57,14 @@
  
  
                 <!-- Search Box -->
-                <div class="position-relative" style="max-width: 250px; width: 100%;">
+                <!-- <div class="position-relative" style="max-width: 250px; width: 100%;">
                     <input type="text" class="form-control ps-5" placeholder="Search here" style="border-radius: 8px;">
                     <img src="/assets/icons/search.svg" alt="Search"
                         class="position-absolute top-50 start-0 translate-middle-y ms-3" style="width: 16px; height: 16px;">
-                </div>
-            </div>
+                </div>-->
+        </div>
  
+            
             <div class="mx-4 mt-4">
                 <div class="row">
                     @foreach ($lowongans as $lowongan)
