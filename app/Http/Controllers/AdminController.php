@@ -33,11 +33,20 @@ class AdminController extends Controller
                 });
             }
 
+            // Add jurusan filter
+            if (request('jurusan')) {
+                $query->where('jurusan', request('jurusan'));
+            }
+
             $mahasiswa = $query->paginate(10)->withQueryString();
+
+            // Get unique jurusan values for filter dropdown
+            $jurusanList = Mahasiswa::select('jurusan')->distinct()->pluck('jurusan');
 
             return view('admin.pengguna', [
                 'activePage' => 'pengguna',
                 'mahasiswa' => $mahasiswa,
+                'jurusanList' => $jurusanList,
             ]);
         }
 

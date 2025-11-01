@@ -88,8 +88,16 @@
                     <div class="d-flex gap-2">
                         <form action="{{ route('admin.dashboard') }}" method="GET" class="d-flex gap-2">
                             <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan NIM, nama, atau email..." value="{{ request('search') }}">
+                            <select name="jurusan" class="form-control">
+                                <option value="">Semua Jurusan</option>
+                                @foreach($jurusanList as $jurusan)
+                                    <option value="{{ $jurusan }}" {{ request('jurusan') == $jurusan ? 'selected' : '' }}>
+                                        {{ $jurusan }}
+                                    </option>
+                                @endforeach
+                            </select>
                             <button type="submit" class="btn btn-danger">Cari</button>
-                            @if(request('search'))
+                            @if(request('search') || request('jurusan'))
                                 <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Reset</a>
                             @endif
                         </form>
